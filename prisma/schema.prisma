@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+enum plano {
+  FREE
+  BASICO
+  PRO
+}
+model Usuario{
+  id String @id @default(uuid())
+  nome String  
+  email String @unique
+  senha String 
+  historias_salvas Int
+  plano    plano @default(FREE)
+  historias_geradas_no_mes Int
+  data_proxima_renovacao DateTime
+  foto_perfil  String ?
+  mes_referencia DateTime @default(now()) 
+  assinatura Assinatura?
+  crianca  Crianca[]
+}
+
+enum autismo {
+  NIVEL_1 @map("NIVEL 1")
+  NIVEL_2 @map("NIVEL 2")
+  NIVEL_3 @map("NIVEL 3")
+
+}
+enum alfabetizacao {
+  PRE_SILABICA
+  SILABICA
+  SILABICO_ALFABETICA
+  ALFABETICA
+  ORTOGRAFICA
+  
+
+}
+model  Crianca{
+  id String @id @default(uuid())
+  nome String  
+  nivel_autismo autismo
+  hiperfoco String
+  animais_estimacao String ?
+  amigos_nomes String ?
+  pais String
+  parentes String
+  foto_perfil String ?
+  usuario_id  String
+  nivel_alfabetizacao  alfabetizacao
+  usuario Usuario @relation(fields: [usuario_id],references: [id])
+  histaria Historia[]
+} 
+model Historia{
+id String @id @default(uuid())
+texto  String
+imagem Imagem[]
+nota Int?
+crianca_id  String
+criado_em DateTime @default(now())
+crianca Crianca @relation(fields: [crianca_id], references: [id] )
+}
+
+model Imagem{
+  id String @id @default(uuid())
+  conteudo String
+  historia_id String
+  historia Historia @relation(fields: [historia_id], references: [id] )
+}
+enum status {
+  ATIVO
+  CANCELADO
+  VENCIDO
+}
+enum periodo {
+  MENSAL
+  ANUAL
+}
+
+model Assinatura{
+id String @id @default(uuid())
+ usuario_id  String @unique
+ usuario Usuario @relation(fields: [usuario_id],references: [id])
+ stripe_subscription_id String
+ stripe_customer_id  String
+ status status 
+ periodo  periodo
+ inicio DateTime
+ fim DateTime 
+}
