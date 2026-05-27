@@ -1,7 +1,17 @@
+
+
+import { Dispatch, SetStateAction, useState } from "react"
 import {Botao} from "./Botao"
 import Image from "next/image"
-export function Cabecalho(){
+import { FormularioUsuario } from "./FormularioCadastroUsuario"
 
+interface Props{
+    setcadastro:Dispatch<SetStateAction<boolean>>
+    setlogin:Dispatch<SetStateAction<boolean>>
+}
+
+export function Cabecalho({setcadastro,setlogin}:Props){
+        
     return(
         <header className="flex flex-row justify-between px-4 p-5 bg-gradient-to-br from-blue-50 to-white items-center  border rounded-b-xl rounded-b-sm">
             <div className=" items-center flex flex-row px-5 gap-5">
@@ -10,8 +20,9 @@ export function Cabecalho(){
          </div>
           
            <div className=" flex flex-row  items-center  gap-5">
-           <Botao >Login</Botao>
-           <Botao >Experimente Grátis</Botao>
+           <Botao FormOpen={()=>setlogin(true)}>Login</Botao>
+           <Botao FormOpen={()=>setcadastro(true)} >Experimente Grátis</Botao>
+          
          </div>
         </header>
     )

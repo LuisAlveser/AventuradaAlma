@@ -1,20 +1,28 @@
+'use client'
 import { Cabecalho } from "@/app/componentes/Cabecalho";
 import { Botao } from "@/app/componentes/Botao";
-
 import { CardsHome } from "./componentes/CardsHome";
 import { FaBookOpen, FaUserAlt,FaImage } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
+import { useState } from "react";
+import { FormularioUsuario } from "./componentes/FormularioCadastroUsuario";
+import { Login } from "./componentes/FormularioLoginUsuario";
+import { Planos } from "./componentes/Planos";
 
 export default function Home() {
+  const[login,setlogin]=useState<boolean>(false)
+  const[cadastro,setcadastro]=useState<boolean>(false)
+  const[planos,setplanos]=useState<boolean>(false)
   return (
     <div className="w-full min-h-screen flex flex-col bg-blue-300">
      
-      <Cabecalho />
+      <Cabecalho setcadastro={setcadastro} setlogin={setlogin} />
 
     
       <main className="flex-1 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 items-center gap-16 p-5">
-        
-     
+           {cadastro&&(<FormularioUsuario setcadastro={setcadastro}/>)}
+            {login&&(<Login setlogin={setlogin}/>)}
+            {planos&&(<Planos setplanos={setplanos}/>)}
         <div className="flex flex-col justify-center gap-6">
           <h1 className="text-4xl md:text-5xl text-black font-bold leading-tight">
             Histórias que encantam e ensinam, feitas para seu filho
@@ -26,8 +34,8 @@ export default function Home() {
           </p>
 
           <div className="flex flex-row items-center gap-4 pt-2">
-            <Botao>Experimente Grátis</Botao>
-            <Botao>Conheça nossos Planos</Botao>
+            <Botao FormOpen={()=>setcadastro(true)}>Experimente Grátis</Botao>
+            <Botao  FormOpen={()=>setplanos(true)}>Conheça nossos Planos</Botao>
           </div>
         </div>
 
@@ -59,7 +67,7 @@ export default function Home() {
     />
          
         </div>
-
+      
       </main>
     </div>
   );
