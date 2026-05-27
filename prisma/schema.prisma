@@ -6,10 +6,13 @@
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
+  
 }
 
 datasource db {
   provider = "postgresql"
+  
+  
 }
 enum plano {
   FREE
@@ -28,7 +31,7 @@ model Usuario{
   foto_perfil  String ?
   mes_referencia DateTime @default(now()) 
   assinatura Assinatura?
-  crianca  Crianca[]
+  crianca   Crianca[]  
 }
 
 enum autismo {
@@ -56,19 +59,19 @@ model  Crianca{
   pais String
   parentes String
   foto_perfil String ?
-  usuario_id  String
+  usuario_id  String 
   nivel_alfabetizacao  alfabetizacao
-  usuario Usuario @relation(fields: [usuario_id],references: [id])
-  histaria Historia[]
+  usuario Usuario  @relation(fields: [usuario_id],references: [id]) 
+  historia Historia[]
 } 
 model Historia{
 id String @id @default(uuid())
 texto  String
 imagem Imagem[]
 nota Int?
-crianca_id  String
+crianca_id  String ?
 criado_em DateTime @default(now())
-crianca Crianca @relation(fields: [crianca_id], references: [id] )
+crianca Crianca ? @relation(fields: [crianca_id], references: [id] )
 }
 
 model Imagem{
