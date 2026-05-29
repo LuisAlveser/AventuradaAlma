@@ -6,24 +6,67 @@ import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { TbPassword } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io"; // Ícone de fechar mais moderno
+import { useForm } from "react-hook-form";
+import {UsuarioLogin} from "../modelos"
+import z from"zod"
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from "sonner"
+import { useRouter } from 'next/navigation';
+import Carregando from "../Carregando";
 
 interface Props {
   setlogin: Dispatch<SetStateAction<boolean>>;
 }
+type UsuarioEsquemaLogin=z.infer<typeof UsuarioLogin>
 
 export function Login({ setlogin }: Props) {
     const [mostrasenha, setmostraSenha] = useState(false);
+    const [carregando,setcarregando]=useState(false)
+     const router = useRouter();
+    const {register,handleSubmit,formState:{errors}}=useForm<UsuarioEsquemaLogin>({
+        resolver:zodResolver(UsuarioLogin)
+    })
 
-    
-  const cadastro = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Olá");
+
+  const login = async (data: UsuarioEsquemaLogin) => {
+    try {
+            setcarregando(true)
+            const response =await fetch(("http://localhost:3000/api/usuario/login"),{
+               headers: {
+                'Content-Type': 'application/json',
+               },
+               method:"POST",
+              body: JSON.stringify({
+                email:data.email,
+                senha:data.senha
+              }),
+            })
+            if(response.status===201){
+                 setlogin(false)
+                  setcarregando(false)
+                router.push("/home"); 
+             toast.success("Login realizado com sucesso")
+            }
+            if(response.status===404){
+                   setcarregando(false)
+                 toast.error("Email ou Senha inválidos")
+            }
+
+
+        } catch (error) {
+               setcarregando(false)
+           
+            toast.success("Erro ao logar")
+     } 
+     finally{
+           setcarregando(false)
+     }
   };
 
   return (
     <div className="fixed inset-0 w-screen h-screen flex justify-center items-center bg-black/60 backdrop-blur-sm z-50 p-4">
       <form 
-        onSubmit={cadastro} 
+        onSubmit={handleSubmit(login)} 
         className="relative flex flex-col justify-center bg-white rounded-2xl gap-5 px-8 py-10 w-full max-w-md shadow-2xl transition-all scale-100"
       >
        
@@ -51,12 +94,14 @@ export function Login({ setlogin }: Props) {
           <div className="relative flex items-center">
             <MdEmail className="absolute left-3.5 text-gray-400 pointer-events-none" size={20} />
             <input 
+            {...register("email")}
               type="email" 
               placeholder="seu@email.com" 
               className="w-full bg-slate-50 text-gray-800 placeholder:text-gray-400 rounded-xl pl-11 pr-4 py-3 outline-none border border-slate-200 focus:border-blue-400 focus:bg-white transition-all text-sm"
               required
             />
           </div>
+          {errors.email&&(<span className="text-red-500">{errors.email.message}</span>)}
         </div>
 
         
@@ -65,11 +110,13 @@ export function Login({ setlogin }: Props) {
           <div className="relative flex items-center">
             <TbPassword className="absolute left-3.5 text-gray-400 pointer-events-none" size={20} />
             <input 
+              {...register("senha")}
               type={mostrasenha?"password":"text"} 
               placeholder="Digite sua senha" 
               className="w-full bg-slate-50 text-gray-800 placeholder:text-gray-400 rounded-xl pl-11 pr-4 py-3 outline-none border border-slate-200 focus:border-blue-400 focus:bg-white transition-all text-sm"
               required
             />
+           
              <button
                type="button"
                onClick={() => setmostraSenha(!mostrasenha)}
@@ -77,14 +124,16 @@ export function Login({ setlogin }: Props) {
                 >
               {mostrasenha ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
              </button>
+
           </div>
+           {errors.senha&&(<span className="text-red-500">{errors.senha.message}</span>)}
         </div>
 
       
         <div className="flex flex-col gap-3 mt-4">
-          <Botao >
-            Entrar
-          </Botao>
+           <button disabled={carregando} className="rounded-2xl  cursor-pointer px-4 py-2  bg-blue-500 hover:bg-blue-700" >
+                              {carregando?<Carregando/>:"Entrar"}
+                            </button>
           <p className="text-center text-xs text-gray-400 px-4">
            Esqueceu sua senha ? <button className="cursor-pointer text-blue-500">Clique aqui!</button>
           </p>

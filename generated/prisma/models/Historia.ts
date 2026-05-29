@@ -415,14 +415,6 @@ export type HistoriaUncheckedUpdateManyWithoutCriancaNestedInput = {
   deleteMany?: Prisma.HistoriaScalarWhereInput | Prisma.HistoriaScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type HistoriaCreateNestedOneWithoutImagemInput = {
   create?: Prisma.XOR<Prisma.HistoriaCreateWithoutImagemInput, Prisma.HistoriaUncheckedCreateWithoutImagemInput>
   connectOrCreate?: Prisma.HistoriaCreateOrConnectWithoutImagemInput

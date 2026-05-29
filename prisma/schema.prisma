@@ -24,10 +24,10 @@ model Usuario{
   nome String  
   email String @unique
   senha String 
-  historias_salvas Int
-  plano    plano @default(FREE)
-  historias_geradas_no_mes Int
-  data_proxima_renovacao DateTime
+  historias_salvas Int?
+  plano    plano @default(FREE) 
+  historias_geradas_no_mes Int?
+  data_proxima_renovacao  DateTime ?
   foto_perfil  String ?
   mes_referencia DateTime @default(now()) 
   assinatura Assinatura?

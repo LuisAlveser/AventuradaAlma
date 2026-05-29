@@ -2,7 +2,7 @@
 import { ReactNode, } from "react"
 interface Props{
     children:ReactNode
-  FormOpen?: () => void;
+    FormOpen?: () => void;
 
 
 }
@@ -11,6 +11,6 @@ interface Props{
 export function Botao({children,FormOpen}:Props){
 
     return(
-        <button className="rounded-2xl bg-blue-500 cursor-pointer px-4 py-2 hover:bg-blue-600" onClick={FormOpen}>{children}</button>
+        <button className="rounded-2xl  cursor-pointer px-4 py-2 bg-blue-500 hover:bg-blue-700" onClick={FormOpen}>{children}</button>
     )
 }

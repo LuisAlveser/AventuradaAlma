@@ -218,10 +218,10 @@ export type UsuarioGroupByOutputType = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas: number | null
   plano: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date
+  historias_geradas_no_mes: number | null
+  data_proxima_renovacao: Date | null
   foto_perfil: string | null
   mes_referencia: Date
   _count: UsuarioCountAggregateOutputType | null
@@ -254,10 +254,10 @@ export type UsuarioWhereInput = {
   nome?: Prisma.StringFilter<"Usuario"> | string
   email?: Prisma.StringFilter<"Usuario"> | string
   senha?: Prisma.StringFilter<"Usuario"> | string
-  historias_salvas?: Prisma.IntFilter<"Usuario"> | number
+  historias_salvas?: Prisma.IntNullableFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoFilter<"Usuario"> | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFilter<"Usuario"> | number
-  data_proxima_renovacao?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  historias_geradas_no_mes?: Prisma.IntNullableFilter<"Usuario"> | number | null
+  data_proxima_renovacao?: Prisma.DateTimeNullableFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   assinatura?: Prisma.XOR<Prisma.AssinaturaNullableScalarRelationFilter, Prisma.AssinaturaWhereInput> | null
@@ -269,10 +269,10 @@ export type UsuarioOrderByWithRelationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  historias_salvas?: Prisma.SortOrder
+  historias_salvas?: Prisma.SortOrderInput | Prisma.SortOrder
   plano?: Prisma.SortOrder
-  historias_geradas_no_mes?: Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrder
+  historias_geradas_no_mes?: Prisma.SortOrderInput | Prisma.SortOrder
+  data_proxima_renovacao?: Prisma.SortOrderInput | Prisma.SortOrder
   foto_perfil?: Prisma.SortOrderInput | Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
   assinatura?: Prisma.AssinaturaOrderByWithRelationInput
@@ -287,10 +287,10 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UsuarioWhereInput | Prisma.UsuarioWhereInput[]
   nome?: Prisma.StringFilter<"Usuario"> | string
   senha?: Prisma.StringFilter<"Usuario"> | string
-  historias_salvas?: Prisma.IntFilter<"Usuario"> | number
+  historias_salvas?: Prisma.IntNullableFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoFilter<"Usuario"> | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFilter<"Usuario"> | number
-  data_proxima_renovacao?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  historias_geradas_no_mes?: Prisma.IntNullableFilter<"Usuario"> | number | null
+  data_proxima_renovacao?: Prisma.DateTimeNullableFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeFilter<"Usuario"> | Date | string
   assinatura?: Prisma.XOR<Prisma.AssinaturaNullableScalarRelationFilter, Prisma.AssinaturaWhereInput> | null
@@ -302,10 +302,10 @@ export type UsuarioOrderByWithAggregationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  historias_salvas?: Prisma.SortOrder
+  historias_salvas?: Prisma.SortOrderInput | Prisma.SortOrder
   plano?: Prisma.SortOrder
-  historias_geradas_no_mes?: Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrder
+  historias_geradas_no_mes?: Prisma.SortOrderInput | Prisma.SortOrder
+  data_proxima_renovacao?: Prisma.SortOrderInput | Prisma.SortOrder
   foto_perfil?: Prisma.SortOrderInput | Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
   _count?: Prisma.UsuarioCountOrderByAggregateInput
@@ -323,10 +323,10 @@ export type UsuarioScalarWhereWithAggregatesInput = {
   nome?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
   email?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
   senha?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
-  historias_salvas?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
+  historias_salvas?: Prisma.IntNullableWithAggregatesFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoWithAggregatesFilter<"Usuario"> | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
-  data_proxima_renovacao?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+  historias_geradas_no_mes?: Prisma.IntNullableWithAggregatesFilter<"Usuario"> | number | null
+  data_proxima_renovacao?: Prisma.DateTimeNullableWithAggregatesFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
 }
@@ -336,10 +336,10 @@ export type UsuarioCreateInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   assinatura?: Prisma.AssinaturaCreateNestedOneWithoutUsuarioInput
@@ -351,10 +351,10 @@ export type UsuarioUncheckedCreateInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   assinatura?: Prisma.AssinaturaUncheckedCreateNestedOneWithoutUsuarioInput
@@ -366,10 +366,10 @@ export type UsuarioUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assinatura?: Prisma.AssinaturaUpdateOneWithoutUsuarioNestedInput
@@ -381,10 +381,10 @@ export type UsuarioUncheckedUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assinatura?: Prisma.AssinaturaUncheckedUpdateOneWithoutUsuarioNestedInput
@@ -396,10 +396,10 @@ export type UsuarioCreateManyInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
 }
@@ -409,10 +409,10 @@ export type UsuarioUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -422,10 +422,10 @@ export type UsuarioUncheckedUpdateManyInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -488,8 +488,8 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -500,12 +500,16 @@ export type EnumplanoFieldUpdateOperationsInput = {
   set?: $Enums.plano
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type UsuarioCreateNestedOneWithoutCriancaInput = {
@@ -541,10 +545,10 @@ export type UsuarioCreateWithoutCriancaInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   assinatura?: Prisma.AssinaturaCreateNestedOneWithoutUsuarioInput
@@ -555,10 +559,10 @@ export type UsuarioUncheckedCreateWithoutCriancaInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   assinatura?: Prisma.AssinaturaUncheckedCreateNestedOneWithoutUsuarioInput
@@ -585,10 +589,10 @@ export type UsuarioUpdateWithoutCriancaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assinatura?: Prisma.AssinaturaUpdateOneWithoutUsuarioNestedInput
@@ -599,10 +603,10 @@ export type UsuarioUncheckedUpdateWithoutCriancaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assinatura?: Prisma.AssinaturaUncheckedUpdateOneWithoutUsuarioNestedInput
@@ -613,10 +617,10 @@ export type UsuarioCreateWithoutAssinaturaInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   crianca?: Prisma.CriancaCreateNestedManyWithoutUsuarioInput
@@ -627,10 +631,10 @@ export type UsuarioUncheckedCreateWithoutAssinaturaInput = {
   nome: string
   email: string
   senha: string
-  historias_salvas: number
+  historias_salvas?: number | null
   plano?: $Enums.plano
-  historias_geradas_no_mes: number
-  data_proxima_renovacao: Date | string
+  historias_geradas_no_mes?: number | null
+  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
   crianca?: Prisma.CriancaUncheckedCreateNestedManyWithoutUsuarioInput
@@ -657,10 +661,10 @@ export type UsuarioUpdateWithoutAssinaturaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   crianca?: Prisma.CriancaUpdateManyWithoutUsuarioNestedInput
@@ -671,10 +675,10 @@ export type UsuarioUncheckedUpdateWithoutAssinaturaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.IntFieldUpdateOperationsInput | number
+  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.IntFieldUpdateOperationsInput | number
-  data_proxima_renovacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   crianca?: Prisma.CriancaUncheckedUpdateManyWithoutUsuarioNestedInput
@@ -786,10 +790,10 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     nome: string
     email: string
     senha: string
-    historias_salvas: number
+    historias_salvas: number | null
     plano: $Enums.plano
-    historias_geradas_no_mes: number
-    data_proxima_renovacao: Date
+    historias_geradas_no_mes: number | null
+    data_proxima_renovacao: Date | null
     foto_perfil: string | null
     mes_referencia: Date
   }, ExtArgs["result"]["usuario"]>
