@@ -52,6 +52,7 @@ enum alfabetizacao {
 model  Crianca{
   id String @id @default(uuid())
   nome String  
+  idade String
   nivel_autismo autismo
   hiperfoco String
   animais_estimacao String ?
@@ -61,7 +62,7 @@ model  Crianca{
   foto_perfil String ?
   usuario_id  String 
   nivel_alfabetizacao  alfabetizacao
-  usuario Usuario  @relation(fields: [usuario_id],references: [id]) 
+  usuario Usuario  @relation(fields: [usuario_id],references: [id],onDelete: Cascade) 
   historia Historia[]
 } 
 model Historia{
@@ -71,14 +72,14 @@ imagem Imagem[]
 nota Int?
 crianca_id  String ?
 criado_em DateTime @default(now())
-crianca Crianca ? @relation(fields: [crianca_id], references: [id] )
+crianca Crianca ? @relation(fields: [crianca_id], references: [id],onDelete: Cascade)
 }
 
 model Imagem{
   id String @id @default(uuid())
   conteudo String
   historia_id String
-  historia Historia @relation(fields: [historia_id], references: [id] )
+  historia Historia @relation(fields: [historia_id], references: [id],onDelete: Cascade )
 }
 enum status {
   ATIVO

@@ -1,5 +1,11 @@
+import { FormularioCrianca } from "../../componentes/FormularioCrianca";
+
+
 export default function AdicionarCrianca(){
+    
     return(
-        <div>add  criança</div>
+    <div className="w-full h-full" >
+        <FormularioCrianca/>
+        </div>
     )
 }

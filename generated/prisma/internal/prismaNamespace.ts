@@ -836,6 +836,7 @@ export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeo
 export const CriancaScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
+  idade: 'idade',
   nivel_autismo: 'nivel_autismo',
   hiperfoco: 'hiperfoco',
   animais_estimacao: 'animais_estimacao',

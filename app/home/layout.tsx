@@ -6,7 +6,7 @@ import { IoMdSettings } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import jwt  from "jsonwebtoken"
 import { Navegaçao } from "./componentes/Navegação";
-import { redirect } from 'next/navigation';
+
 
 import { cookies } from "next/headers";
 interface UsuarioHome{
@@ -16,14 +16,12 @@ interface UsuarioHome{
     foto:string|null
 }
 
-export default async function Home({ children }: { children: React.ReactNode }) {
+export default async function Home({ children }: { children: React.ReactNode },
   
-  const links = [
-    { name: 'Histórias Salvas', href: '/home/paginas/historias_salvas',icon: FaBookOpen,id:1},
-    { name: 'Adicionar Criança', href: '/home/paginas/adicionar_crianca',icon: TiUserAdd ,id:2},
-    { name: 'Crianças Salvas', href: '/home/paginas/criancas_salvas',icon: FaUsers,id:3 },
+) {
    
-  ]
+   
+ 
     
       const cookie=await cookies()
         const token = cookie.get('auth_token')?.value
@@ -61,17 +59,11 @@ export default async function Home({ children }: { children: React.ReactNode }) 
               <p className="text-xs text-slate-400 font-medium">Painel de Controle</p>
             </div>
           </div>
-             <Navegaçao itens={links} />
+             <Navegaçao />
           
         </div>
 
-       
-        <div className=" border-t border-slate-100 pt-4">
-          <button className="flex items-center gap-3 w-full px-4 py-3 text-slate-600 font-medium rounded-xl transition-all duration-200 hover:bg-red-50 hover:text-red-600 group">
-            <IoMdSettings size={20} className="text-slate-400 group-hover:text-red-500 transition-colors" />
-            <span className="text-sm">Configurações</span>
-          </button>
-        </div>
+      
 
       </aside>
 

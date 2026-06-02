@@ -27,6 +27,7 @@ export type AggregateCrianca = {
 export type CriancaMinAggregateOutputType = {
   id: string | null
   nome: string | null
+  idade: string | null
   nivel_autismo: $Enums.autismo | null
   hiperfoco: string | null
   animais_estimacao: string | null
@@ -41,6 +42,7 @@ export type CriancaMinAggregateOutputType = {
 export type CriancaMaxAggregateOutputType = {
   id: string | null
   nome: string | null
+  idade: string | null
   nivel_autismo: $Enums.autismo | null
   hiperfoco: string | null
   animais_estimacao: string | null
@@ -55,6 +57,7 @@ export type CriancaMaxAggregateOutputType = {
 export type CriancaCountAggregateOutputType = {
   id: number
   nome: number
+  idade: number
   nivel_autismo: number
   hiperfoco: number
   animais_estimacao: number
@@ -71,6 +74,7 @@ export type CriancaCountAggregateOutputType = {
 export type CriancaMinAggregateInputType = {
   id?: true
   nome?: true
+  idade?: true
   nivel_autismo?: true
   hiperfoco?: true
   animais_estimacao?: true
@@ -85,6 +89,7 @@ export type CriancaMinAggregateInputType = {
 export type CriancaMaxAggregateInputType = {
   id?: true
   nome?: true
+  idade?: true
   nivel_autismo?: true
   hiperfoco?: true
   animais_estimacao?: true
@@ -99,6 +104,7 @@ export type CriancaMaxAggregateInputType = {
 export type CriancaCountAggregateInputType = {
   id?: true
   nome?: true
+  idade?: true
   nivel_autismo?: true
   hiperfoco?: true
   animais_estimacao?: true
@@ -186,6 +192,7 @@ export type CriancaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type CriancaGroupByOutputType = {
   id: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao: string | null
@@ -221,6 +228,7 @@ export type CriancaWhereInput = {
   NOT?: Prisma.CriancaWhereInput | Prisma.CriancaWhereInput[]
   id?: Prisma.StringFilter<"Crianca"> | string
   nome?: Prisma.StringFilter<"Crianca"> | string
+  idade?: Prisma.StringFilter<"Crianca"> | string
   nivel_autismo?: Prisma.EnumautismoFilter<"Crianca"> | $Enums.autismo
   hiperfoco?: Prisma.StringFilter<"Crianca"> | string
   animais_estimacao?: Prisma.StringNullableFilter<"Crianca"> | string | null
@@ -237,6 +245,7 @@ export type CriancaWhereInput = {
 export type CriancaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  idade?: Prisma.SortOrder
   nivel_autismo?: Prisma.SortOrder
   hiperfoco?: Prisma.SortOrder
   animais_estimacao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -256,6 +265,7 @@ export type CriancaWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CriancaWhereInput[]
   NOT?: Prisma.CriancaWhereInput | Prisma.CriancaWhereInput[]
   nome?: Prisma.StringFilter<"Crianca"> | string
+  idade?: Prisma.StringFilter<"Crianca"> | string
   nivel_autismo?: Prisma.EnumautismoFilter<"Crianca"> | $Enums.autismo
   hiperfoco?: Prisma.StringFilter<"Crianca"> | string
   animais_estimacao?: Prisma.StringNullableFilter<"Crianca"> | string | null
@@ -272,6 +282,7 @@ export type CriancaWhereUniqueInput = Prisma.AtLeast<{
 export type CriancaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  idade?: Prisma.SortOrder
   nivel_autismo?: Prisma.SortOrder
   hiperfoco?: Prisma.SortOrder
   animais_estimacao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -292,6 +303,7 @@ export type CriancaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CriancaScalarWhereWithAggregatesInput | Prisma.CriancaScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Crianca"> | string
   nome?: Prisma.StringWithAggregatesFilter<"Crianca"> | string
+  idade?: Prisma.StringWithAggregatesFilter<"Crianca"> | string
   nivel_autismo?: Prisma.EnumautismoWithAggregatesFilter<"Crianca"> | $Enums.autismo
   hiperfoco?: Prisma.StringWithAggregatesFilter<"Crianca"> | string
   animais_estimacao?: Prisma.StringNullableWithAggregatesFilter<"Crianca"> | string | null
@@ -306,6 +318,7 @@ export type CriancaScalarWhereWithAggregatesInput = {
 export type CriancaCreateInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -321,6 +334,7 @@ export type CriancaCreateInput = {
 export type CriancaUncheckedCreateInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -336,6 +350,7 @@ export type CriancaUncheckedCreateInput = {
 export type CriancaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -351,6 +366,7 @@ export type CriancaUpdateInput = {
 export type CriancaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -366,6 +382,7 @@ export type CriancaUncheckedUpdateInput = {
 export type CriancaCreateManyInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -380,6 +397,7 @@ export type CriancaCreateManyInput = {
 export type CriancaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -393,6 +411,7 @@ export type CriancaUpdateManyMutationInput = {
 export type CriancaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -417,6 +436,7 @@ export type CriancaOrderByRelationAggregateInput = {
 export type CriancaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  idade?: Prisma.SortOrder
   nivel_autismo?: Prisma.SortOrder
   hiperfoco?: Prisma.SortOrder
   animais_estimacao?: Prisma.SortOrder
@@ -431,6 +451,7 @@ export type CriancaCountOrderByAggregateInput = {
 export type CriancaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  idade?: Prisma.SortOrder
   nivel_autismo?: Prisma.SortOrder
   hiperfoco?: Prisma.SortOrder
   animais_estimacao?: Prisma.SortOrder
@@ -445,6 +466,7 @@ export type CriancaMaxOrderByAggregateInput = {
 export type CriancaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  idade?: Prisma.SortOrder
   nivel_autismo?: Prisma.SortOrder
   hiperfoco?: Prisma.SortOrder
   animais_estimacao?: Prisma.SortOrder
@@ -530,6 +552,7 @@ export type CriancaUpdateOneWithoutHistoriaNestedInput = {
 export type CriancaCreateWithoutUsuarioInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -544,6 +567,7 @@ export type CriancaCreateWithoutUsuarioInput = {
 export type CriancaUncheckedCreateWithoutUsuarioInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -587,6 +611,7 @@ export type CriancaScalarWhereInput = {
   NOT?: Prisma.CriancaScalarWhereInput | Prisma.CriancaScalarWhereInput[]
   id?: Prisma.StringFilter<"Crianca"> | string
   nome?: Prisma.StringFilter<"Crianca"> | string
+  idade?: Prisma.StringFilter<"Crianca"> | string
   nivel_autismo?: Prisma.EnumautismoFilter<"Crianca"> | $Enums.autismo
   hiperfoco?: Prisma.StringFilter<"Crianca"> | string
   animais_estimacao?: Prisma.StringNullableFilter<"Crianca"> | string | null
@@ -601,6 +626,7 @@ export type CriancaScalarWhereInput = {
 export type CriancaCreateWithoutHistoriaInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -615,6 +641,7 @@ export type CriancaCreateWithoutHistoriaInput = {
 export type CriancaUncheckedCreateWithoutHistoriaInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -645,6 +672,7 @@ export type CriancaUpdateToOneWithWhereWithoutHistoriaInput = {
 export type CriancaUpdateWithoutHistoriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -659,6 +687,7 @@ export type CriancaUpdateWithoutHistoriaInput = {
 export type CriancaUncheckedUpdateWithoutHistoriaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -673,6 +702,7 @@ export type CriancaUncheckedUpdateWithoutHistoriaInput = {
 export type CriancaCreateManyUsuarioInput = {
   id?: string
   nome: string
+  idade: string
   nivel_autismo: $Enums.autismo
   hiperfoco: string
   animais_estimacao?: string | null
@@ -686,6 +716,7 @@ export type CriancaCreateManyUsuarioInput = {
 export type CriancaUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -700,6 +731,7 @@ export type CriancaUpdateWithoutUsuarioInput = {
 export type CriancaUncheckedUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -714,6 +746,7 @@ export type CriancaUncheckedUpdateWithoutUsuarioInput = {
 export type CriancaUncheckedUpdateManyWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  idade?: Prisma.StringFieldUpdateOperationsInput | string
   nivel_autismo?: Prisma.EnumautismoFieldUpdateOperationsInput | $Enums.autismo
   hiperfoco?: Prisma.StringFieldUpdateOperationsInput | string
   animais_estimacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -758,6 +791,7 @@ export type CriancaCountOutputTypeCountHistoriaArgs<ExtArgs extends runtime.Type
 export type CriancaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
+  idade?: boolean
   nivel_autismo?: boolean
   hiperfoco?: boolean
   animais_estimacao?: boolean
@@ -775,6 +809,7 @@ export type CriancaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type CriancaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
+  idade?: boolean
   nivel_autismo?: boolean
   hiperfoco?: boolean
   animais_estimacao?: boolean
@@ -790,6 +825,7 @@ export type CriancaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type CriancaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
+  idade?: boolean
   nivel_autismo?: boolean
   hiperfoco?: boolean
   animais_estimacao?: boolean
@@ -805,6 +841,7 @@ export type CriancaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type CriancaSelectScalar = {
   id?: boolean
   nome?: boolean
+  idade?: boolean
   nivel_autismo?: boolean
   hiperfoco?: boolean
   animais_estimacao?: boolean
@@ -816,7 +853,7 @@ export type CriancaSelectScalar = {
   nivel_alfabetizacao?: boolean
 }
 
-export type CriancaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "nivel_autismo" | "hiperfoco" | "animais_estimacao" | "amigos_nomes" | "pais" | "parentes" | "foto_perfil" | "usuario_id" | "nivel_alfabetizacao", ExtArgs["result"]["crianca"]>
+export type CriancaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "idade" | "nivel_autismo" | "hiperfoco" | "animais_estimacao" | "amigos_nomes" | "pais" | "parentes" | "foto_perfil" | "usuario_id" | "nivel_alfabetizacao", ExtArgs["result"]["crianca"]>
 export type CriancaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   historia?: boolean | Prisma.Crianca$historiaArgs<ExtArgs>
@@ -838,6 +875,7 @@ export type $CriancaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     nome: string
+    idade: string
     nivel_autismo: $Enums.autismo
     hiperfoco: string
     animais_estimacao: string | null
@@ -1274,6 +1312,7 @@ export interface Prisma__CriancaClient<T, Null = never, ExtArgs extends runtime.
 export interface CriancaFieldRefs {
   readonly id: Prisma.FieldRef<"Crianca", 'String'>
   readonly nome: Prisma.FieldRef<"Crianca", 'String'>
+  readonly idade: Prisma.FieldRef<"Crianca", 'String'>
   readonly nivel_autismo: Prisma.FieldRef<"Crianca", 'autismo'>
   readonly hiperfoco: Prisma.FieldRef<"Crianca", 'String'>
   readonly animais_estimacao: Prisma.FieldRef<"Crianca", 'String'>
