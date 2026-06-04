@@ -9,9 +9,10 @@ export function middleware(request: NextRequest) {
    if(pathname.startsWith("/home")&&!cookie){
     return NextResponse.redirect(new URL('/', request.url))
    }
+    
     return  NextResponse.next()
   
 }
 export const config = {
-  matcher: ['/home/:path*'],
+  matcher: ['/home/:path*',],
 }

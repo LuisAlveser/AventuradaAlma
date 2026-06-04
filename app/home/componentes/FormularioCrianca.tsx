@@ -68,16 +68,16 @@ export function FormularioCrianca() {
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full max-w-5xl bg-white rounded-xl p-5 shadow-lg border border-slate-100 flex flex-col justify-between max-h-[95vh] overflow-y-auto md:overflow-hidden"
             >
-                {/* Cabeçalho Compacto */}
+             
                 <div className="text-center mb-3">
                     <h2 className="text-gray-800 text-xl font-bold tracking-tight">Cadastro do Perfil da Criança</h2>
                     <p className="text-slate-500 text-xs">Preencha as informações essenciais abaixo.</p>
                 </div>
 
-                {/* Grid Principal - 3 Colunas no Desktop */}
+                
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2.5 text-xs">
                     
-                    {/* Seção 1: Básicos */}
+                  
                     <div className="flex flex-col gap-2 md:border-r md:border-slate-100 md:pr-4">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">1. Identificação</span>
                         
@@ -108,7 +108,7 @@ export function FormularioCrianca() {
                        
                     </div>
 
-                    {/* Seção 2: Desenvolvimento */}
+                   
                     <div className="flex flex-col gap-2 md:border-r md:border-slate-100 md:px-4">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">2. Perfil Cognitivo</span>
 
@@ -152,7 +152,7 @@ export function FormularioCrianca() {
                         </div>
                     </div>
 
-                    {/* Seção 3: Social / Família */}
+                   
                     <div className="flex flex-col gap-2 md:pl-4">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">3. Convivência</span>
 
@@ -185,7 +185,7 @@ export function FormularioCrianca() {
 
                 </div>
 
-                {/* Campo de Amigos Ocupando a Base Inteira do Grid */}
+              
                 <div className="flex flex-col gap-1 text-xs mt-2.5">
                     <label className="font-medium text-slate-600">Nomes dos Amigos Próximos (Opcional)</label>
                     <div className="relative flex items-center">
@@ -194,7 +194,7 @@ export function FormularioCrianca() {
                     </div>
                 </div>
 
-                {/* Botão de Envio Compacto */}
+               
                 <div className="mt-4">
                     <button
                         type="submit"

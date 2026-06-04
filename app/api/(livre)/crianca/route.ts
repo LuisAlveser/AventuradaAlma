@@ -6,6 +6,7 @@ import { autismo,alfabetizacao, Usuario } from '@/generated/prisma/client'
 import { prisma } from '@/lib/prima'
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
+import { ZodError } from 'zod'
 
 const supabaseUrl = process.env.PROJETOURL!
 const supabaseKey = process.env.APIKEY!
@@ -84,12 +85,74 @@ export async function POST(request:NextRequest){
     }, { status: 200 })
 
     }
+      const validador=CriancaCadastro.parse(dadosCrianca)
+      
+     await prisma.crianca.create({data:{
+      nome: validador.nome,
+      idade: validador.idade,
+      nivel_autismo: validador.nivel_autismo as autismo,
+      hiperfoco: validador.hiperfoco,
+      pais: validador.pais,
+      nivel_alfabetizacao: validador.nivel_alfabetizacao as alfabetizacao,
+      animais_estimacao: validador.animais_estimacao,
+      amigos_nomes: validador.amigos_nomes,
+      parentes: validador.parentes?validador.parentes:"",
+      foto_perfil:null,
+      usuario:{
+        connect:{
+            id:usuario!.id
+        }
+      }
+     }})
+        return NextResponse.json({ 
+      message: "Cadastro realizado com sucesso!",
+      
+    }, { status: 200 })
+
       } catch (error: any) {
           console.error("Erro na rota POST:", error)
     
    
-    if (error.errors) {
-      return NextResponse.json({ error: "Dados inválidos", detalhes: error.errors }, { status: 400 })
+    if (error as any) {
+           if(error instanceof ZodError){
+             return NextResponse.json({ error: "Erro no formulário" }, { status: 400 })
+           }
+      return NextResponse.json({ error: "Erro no servidor" }, { status: 500 })
     }
       }
+}
+export async function GET(request:NextRequest){
+
+    try {
+          const cookieStore = await cookies();
+   const token = cookieStore.get('auth_token')?.value;
+  
+    const usuario= await jwt.decode(token!) as {id:string}|null
+     if(!usuario){
+        return NextResponse.json({ mensagem:"Usuário não autenticado" }, { status: 404 })
+     }
+     const url =new URL(request.url)
+
+     const {searchParams}=url
+     
+
+    
+        const total_registros:number=(await prisma.crianca.count({where:{usuario_id:usuario.id}}));
+        const limite:number=3 //Quantidade de itens a serem mostrados
+        const paginaAtual:number=parseInt(searchParams.get("pagina")||"1")
+       const numero_paginas=Math.ceil(total_registros/limite)
+
+        const pula_registros:number=(paginaAtual-1)*limite
+        
+        const criancas=await prisma.crianca.findMany({where:{usuario_id:usuario.id},take:limite ,skip:pula_registros,orderBy:{nome:"desc"}})
+        
+        if(criancas.length>0){
+            return NextResponse.json({ crianca: criancas ,paginacao:{paginaAtual,total_registros,numero_paginas}}, 
+                { status: 200 })
+        }
+        return   NextResponse.json({ mensagem:"Nenhuma criança cadastrada" }, { status: 404 })
+
+    } catch (error) {
+         return NextResponse.json({ error: "Erro no servidor" }, { status: 500 })
+    }
 }

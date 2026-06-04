@@ -5,11 +5,12 @@ import { FaBookOpen, FaUsers } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 import { IoMdSettings } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
-
+import { FiLayers } from "react-icons/fi";
 import { IconType } from "react-icons/lib";
 
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 import Link from "next/link";
+
 interface ItensNav{
     id:number,
     icon: IconType,
@@ -24,15 +25,18 @@ interface ItensNavArray{
 
 export function Navegaçao(){
     const pathname = usePathname();
+    
    const itens = [
     { name: 'Histórias Salvas', href: '/home/paginas/historias_salvas',icon: FaBookOpen,id:1},
     { name: 'Adicionar Criança', href: '/home/paginas/adicionar_crianca',icon: TiUserAdd ,id:2},
     { name: 'Crianças Salvas', href: '/home/paginas/criancas_salvas',icon: FaUsers,id:3 },
+     { name: 'Planos', href: '/home/paginas/planos',icon: FiLayers,id:4 },
    
   ]
   const Rotaconfiguracao:string= '/home/paginas/configuracoes'
   const ConfigAtivo=pathname===Rotaconfiguracao
     return(
+        <>
          <nav className="flex flex-col gap-4" >
 
                     {itens.map((item) => {
@@ -51,6 +55,10 @@ export function Navegaçao(){
                     </div> 
                       </Link>
                )})}
+                 
+              
+           
+               
             <div className=" border-t border-slate-100 pt-4 ">
               <Link href={Rotaconfiguracao}>  
                <button className={`flex  cursor-pointer items-center gap-3 w-full px-4 py-3 text-slate-600 font-medium rounded-xl transition-all duration-200 group ${ConfigAtivo?"bg-red-600 text-white":" hover:text-red-600"}`}>
@@ -61,5 +69,7 @@ export function Navegaçao(){
         </div>
                    
                   </nav>
+                 
+                 </> 
     )
 }

@@ -77,6 +77,7 @@ export default async function Home({ children }: { children: React.ReactNode },
              <div className=" border-2 bg-blue-800 rounded-2xl px-2">
                <h2 className="text-white">{usuario?.plano}</h2>
              </div>
+             
            </div>
            
         </header>
