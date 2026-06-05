@@ -47,7 +47,7 @@ export function Planos({ setplanos }: Props) {
           </div>
           <ul className="flex-1 space-y-4 mb-8">
             <Feature text="20 histórias por mês" />
-            <Feature text="Salve até 100 histórias" />
+            <Feature text="Salve até 10 histórias" />
             <Feature text="Imagens inclusas" />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors shadow-lg">

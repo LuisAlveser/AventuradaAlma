@@ -4,6 +4,9 @@ import { alfabetizacao, autismo, Usuario } from "@/generated/prisma/client"
 import { useEffect, useState } from "react"
 import { FaUser,FaPen,FaTrash, FaCalendarAlt, FaBrain } from "react-icons/fa";
 import { Paginacao } from "./Paginacao";
+import { useRouter } from "next/navigation";
+import Carregando from "@/app/Carregando";
+import { toast } from "sonner";
 
 interface crianca{
       id: string;
@@ -34,13 +37,17 @@ interface paginacao{
 }
 
 export function CardCriancasSalvas(){
-    const [crianca,setCrianca]=useState<crianca[]|null>([])
+    const [crianca,setCrianca]=useState<crianca[]>([])
     const [paginacao,setpaginacao]=useState<paginacao>()
     const [paginaNav,setpaginaNav]=useState<number>(1)
+    const [carregando,setcarregando]=useState<boolean>(false)
+    const rota=useRouter()
+
 useEffect(()=>{
    
     const buscarcrianca=async (pagina:number)=>{
            try {
+             setcarregando(true)
      const resposta =await fetch(`http://localhost:3000/api/crianca?pagina=${pagina}`,{
         method:"GET"
      })
@@ -49,18 +56,27 @@ useEffect(()=>{
          
         setpaginacao(dados.paginacao)
         setCrianca(dados.crianca)
+       
        }
       } catch (error) {
         
+        toast.error("Erro insperado no servidor")
+      }finally{
+        setcarregando(false)
       }
     }
    buscarcrianca(paginaNav)
 },[paginaNav])
+
+const editar =(dados:crianca)=>{
+    return  rota.push(`/home/paginas/atualizarcrianca?id=${dados.id}`)
+
+}
     return(
               <div className="flex flex-col justify-center items-center">
          <div className=" max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
         
-        {Array.isArray(crianca)&&crianca.length>0?(
+        {carregando?<Carregando/>:Array.isArray(crianca)&&crianca.length>0?(
         
         crianca.map((item ) => (
           <div 
@@ -92,7 +108,7 @@ useEffect(()=>{
 
              
               <div className="flex items-center gap-3 text-slate-400">
-                <button title="Editar" className="hover:text-blue-600 transition-colors cursor-pointer p-1">
+                <button onClick={()=>{editar(item)}}title="Editar" className="hover:text-blue-600 transition-colors cursor-pointer p-1">
                   <FaPen className="text-xs" />
                 </button>
                 <button title="Excluir" className="hover:text-red-600 transition-colors cursor-pointer p-1">

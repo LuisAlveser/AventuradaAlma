@@ -156,3 +156,7 @@ export async function GET(request:NextRequest){
          return NextResponse.json({ error: "Erro no servidor" }, { status: 500 })
     }
 }
+export function PATCH(request : NextRequest){
+          const data= new URL(request.url)
+          const {searchParams}=data
+}
