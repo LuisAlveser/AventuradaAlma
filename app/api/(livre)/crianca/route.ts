@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import {CriancaCadastro} from "@/app/modelos"
-import { autismo,alfabetizacao, Usuario } from '@/generated/prisma/client'
+import { autismo,alfabetizacao, Usuario, plano } from '@/generated/prisma/client'
 import { prisma } from '@/lib/prima'
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
@@ -19,7 +19,20 @@ export async function POST(request:NextRequest){
    const cookieStore = await cookies();
    const token = cookieStore.get('auth_token')?.value;
   
-   const usuario= await jwt.decode(token!) as {id:string}|null
+   const usuario= await jwt.decode(token!) as {id:string,plano:string}|null
+
+   const numero_criancas_salvas=await prisma.crianca.count({where:{usuario_id:usuario?.id}})
+    
+   if(usuario!.plano==="FREE"&&numero_criancas_salvas>=2){
+    return NextResponse.json({mensagem:"Exclua outro registro para salvar este"},{status:403})
+   }
+    if(usuario!.plano==="BASICO"&&numero_criancas_salvas>=10){
+    return NextResponse.json({mensagem:"Exclua outro registro para salvar este"},{status:403})
+   }
+    if(usuario!.plano==="PRO"&&numero_criancas_salvas>=50){
+    return NextResponse.json({mensagem:"Exclua outro registro para salvar este"},{status:403})
+   }
+
 
      
         const formData= await request.formData()
@@ -39,7 +52,7 @@ export async function POST(request:NextRequest){
      }
        
 
-        let fotoUrl=null
+       
         if (file && file.size > 0) {
     
       const extensao = file.name.split('.').pop()
@@ -79,9 +92,7 @@ export async function POST(request:NextRequest){
       }
      }})
           return NextResponse.json({ 
-      success: true, 
       message: "Cadastro realizado com sucesso!",
-      fotoUrl: fotoUrl 
     }, { status: 200 })
 
     }
@@ -155,8 +166,4 @@ export async function GET(request:NextRequest){
     } catch (error) {
          return NextResponse.json({ error: "Erro no servidor" }, { status: 500 })
     }
-}
-export function PATCH(request : NextRequest){
-          const data= new URL(request.url)
-          const {searchParams}=data
 }

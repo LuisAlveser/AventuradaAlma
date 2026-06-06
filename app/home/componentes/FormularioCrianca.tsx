@@ -47,6 +47,9 @@ export function FormularioCrianca() {
           reset();
           toast.success("Criança cadastrada com sucesso")
       }
+      if(resposta.status==403){
+        toast.error("Exclua outro registro para salvar este")
+      }
       if(resposta.status===400){
           setCarregando(false)
           

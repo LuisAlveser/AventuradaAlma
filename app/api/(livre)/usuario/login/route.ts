@@ -6,7 +6,7 @@ import {UsuarioLogin, UsuarioModelo} from "@/app/modelos"
 import { serialize } from 'cookie'
 import jwt  from "jsonwebtoken"
 import  bcrypt from "bcrypt"
-import { plano } from "@/generated/prisma/enums";
+
 
 
 

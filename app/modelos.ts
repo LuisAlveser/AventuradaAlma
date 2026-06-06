@@ -44,3 +44,8 @@ export  const CriancaCadastro =z.object({
   foto_perfil :z.any().default("null").optional(),
   nivel_alfabetizacao :z.string(),
 })
+
+export const UsuarioAtualizacao=z.object({
+  nome: z.string().min(1, "O nome deve ter no mínimo 1 caracter"),
+  email: z.string().email("Email incorreto"), 
+})

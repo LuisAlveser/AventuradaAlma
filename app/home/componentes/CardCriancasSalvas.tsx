@@ -60,7 +60,7 @@ useEffect(()=>{
        }
       } catch (error) {
         
-        toast.error("Erro insperado no servidor")
+        toast.error("Erro inesperado no servidor")
       }finally{
         setcarregando(false)
       }
@@ -71,6 +71,22 @@ useEffect(()=>{
 const editar =(dados:crianca)=>{
     return  rota.push(`/home/paginas/atualizarcrianca?id=${dados.id}`)
 
+}
+const excluir=async (id:string)=>{
+    try {
+          const resposta =await fetch(`http://localhost:3000/api/crianca/${id}`,{
+        method:"DELETE"
+     })
+     if(resposta.status===200){
+        setCrianca((lista)=>lista.filter(item=>item.id!==id))
+        toast.success("Exclução realizada com sucesso")
+     }
+     if(resposta.status===404){
+        toast.error("Id não encontrada")
+     }
+    } catch (error) {
+        toast.error("Erro inesperado no servidor")
+    }
 }
     return(
               <div className="flex flex-col justify-center items-center">
@@ -111,7 +127,8 @@ const editar =(dados:crianca)=>{
                 <button onClick={()=>{editar(item)}}title="Editar" className="hover:text-blue-600 transition-colors cursor-pointer p-1">
                   <FaPen className="text-xs" />
                 </button>
-                <button title="Excluir" className="hover:text-red-600 transition-colors cursor-pointer p-1">
+
+                <button onClick={()=>{excluir(item.id)}} title="Excluir" className="hover:text-red-600 transition-colors cursor-pointer p-1">
                   <FaTrash className="text-xs" />
                 </button>
               </div>

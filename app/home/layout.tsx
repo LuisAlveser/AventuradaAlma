@@ -83,7 +83,7 @@ export default async function Home({ children }: { children: React.ReactNode },
         </header>
         
        
-        <div className="border-2 border-dashed border-slate-200 rounded-2xl h-[calc(100vh-160px)] flex items-center justify-center text-slate-400">
+        <div className="border-2  border-dashed border-slate-200 rounded-2xl h-[calc(100vh-160px)] flex justify-center text-slate-400">
           {children} 
           
         </div>

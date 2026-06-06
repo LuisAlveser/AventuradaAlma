@@ -4,6 +4,7 @@ import { CriancaCadastro } from "@/app/modelos";
 import { supabase } from "../route";
 import { alfabetizacao, autismo } from "@/generated/prisma/enums";
 import { ZodError } from "zod";
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }){
     try {
         const id = (await params).id
@@ -101,10 +102,45 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }, { status: 200 })
     } catch (error ) {
         if(error instanceof ZodError){
-            return NextResponse.json({mensagem:"Erro na formúlario"}, { status: 400 })
+            return NextResponse.json({mensagem:"Erro na formulário"}, { status: 400 })
         }
-          return NextResponse.json({mensagem:"Erro no servido"}, { status: 500 })
+          return NextResponse.json({mensagem:"Erro no servidor"}, { status: 500 })
         
 
     }
+}
+export async function DELETE( request: NextRequest,{params}:{params:Promise<{id:string}>}){
+       try {
+      const {id } =await params
+      console.log("ID ",id)
+      if(!id){
+          return NextResponse.json({mesagem:"Id não encontrado"},{status:404})
+      }
+    
+      const crianca =await prisma.crianca.findFirst({where:{id:id}})
+      if(crianca?.foto_perfil){
+          const { data, error:storageError} = await supabase
+              .storage
+              .from('fotos_perfil')
+              .remove([`${crianca!.foto_perfil}`])
+                if (storageError) {
+              console.log("Erro no storage:",storageError)
+              return NextResponse.json({ error: `Erro na exclução  da imagem: ${storageError.message}` }, { status: 400 })
+            }
+            const  resposta= await prisma.crianca.delete({where:{id:id}})
+         if(resposta){
+           return NextResponse.json({mesagem:"Exclução feita com sucesso"},{status:200})
+      }
+       return NextResponse.json({mesagem:"Id não encontrado"},{status:404})
+            
+      }
+        const  resposta= await prisma.crianca.delete({where:{id:id}})
+      if(resposta){
+        return NextResponse.json({mesagem:"Exclução feita com sucesso"},{status:200})
+      }
+       return NextResponse.json({mesagem:"=Id não encontrado"},{status:404})
+       } catch (error) {
+        console.log(error)
+        return NextResponse.json({mensagem:"Erro no servidor"}, { status: 500 })
+       }
 }
