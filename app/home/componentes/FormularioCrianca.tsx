@@ -1,6 +1,6 @@
 'use client'
 import { useForm } from "react-hook-form";
-import z, { string } from "zod";
+import z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
 import { CriancaCadastro } from "@/app/modelos";
@@ -8,7 +8,7 @@ import {
   FaUser, FaCalendarAlt, FaStar, FaPaw, FaAward, 
   FaBookOpen, FaUsers, FaHeart, FaCamera 
 } from "react-icons/fa";
-import { strict } from "assert";
+
 import { toast } from "sonner"
 
 type CriancaCadastroEsquema = z.infer<typeof CriancaCadastro>

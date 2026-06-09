@@ -9,6 +9,8 @@ import { Navegaçao } from "./componentes/Navegação";
 
 
 import { cookies } from "next/headers";
+import { HistoriaProvider } from "./componentes/HistoriaHook";
+
 interface UsuarioHome{
     id:string,
     nome:string,
@@ -84,8 +86,9 @@ export default async function Home({ children }: { children: React.ReactNode },
         
        
         <div className="border-2  border-dashed border-slate-200 rounded-2xl h-[calc(100vh-160px)] flex justify-center text-slate-400">
-          {children} 
-          
+        
+           <HistoriaProvider>{children}</HistoriaProvider>
+        
         </div>
       </main>
 

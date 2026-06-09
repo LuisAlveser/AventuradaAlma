@@ -29,12 +29,13 @@ export default function PlanosHome() {
             <span className="text-blue-200/60">/sempre</span>
           </div>
           <ul className="flex-1 space-y-4 mb-8">
-            <Feature text="Até 3 histórias" />
+            <Feature text=" Até 3 histórias" />
+             <Feature text=" Salve até 2 crianças" />
             <Feature text="Salve até 2 histórias" />
             <Feature text="Sem imagens" crossout />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 transition-colors">
-            Começar agora
+            Você já está nesse plano
           </button>
         </div>
 
@@ -51,6 +52,7 @@ export default function PlanosHome() {
           <ul className="flex-1 space-y-4 mb-8">
             <Feature text="20 histórias por mês" />
             <Feature text="Salve até 10 histórias" />
+              <Feature text=" Salve até 10 crianças" />
             <Feature text="Imagens inclusas" />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors shadow-lg">
@@ -68,6 +70,7 @@ export default function PlanosHome() {
           <ul className="flex-1 space-y-4 mb-8">
             <Feature text="100 histórias por mês" />
             <Feature text="Salve até 100 histórias" />
+              <Feature text=" Salve até 50 crianças" />
             <Feature text="Imagens inclusas" />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 transition-colors border border-blue-400">

@@ -49,3 +49,7 @@ export const UsuarioAtualizacao=z.object({
   nome: z.string().min(1, "O nome deve ter no mínimo 1 caracter"),
   email: z.string().email("Email incorreto"), 
 })
+
+export const HistoriaFormulario=z.object({
+    conteudoHistoria:z.string().min(2,"Este campo deve ter mais caracteres")
+})

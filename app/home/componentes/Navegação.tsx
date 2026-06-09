@@ -8,7 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FiLayers } from "react-icons/fi";
 import { IconType } from "react-icons/lib";
 import { FaUserEdit } from "react-icons/fa";
-
+import { FaBookOpenReader } from "react-icons/fa6";
 import Link from "next/link";
 
 interface ItensNav{
@@ -26,14 +26,18 @@ interface ItensNavArray{
 export function Navegaçao(){
     const pathname = usePathname();
     const atualizarcrianca=pathname==="/home/paginas/atualizarcrianca"
+    const historiaTela=pathname==="/home/paginas/historia"
    const itens = [
     { name: 'Histórias Salvas', href: '/home/paginas/historias_salvas',icon: FaBookOpen,id:1},
     { name: 'Adicionar Criança', href: '/home/paginas/adicionar_crianca',icon: TiUserAdd ,id:2},
     { name: 'Crianças Salvas', href: '/home/paginas/criancas_salvas',icon: FaUsers,id:3 },
     { name: 'Planos', href: '/home/paginas/planos',icon: FiLayers,id:4 },
+   
     
   ]
   atualizarcrianca?itens.push({ name: 'Atualizar Criança', href: '/home/paginas/atualizarcrianca',icon: FaUserEdit,id:5 }):null
+ historiaTela?itens.push({ name: 'História', href: '/home/paginas/historia',icon:  FaBookOpenReader,id:6}):null
+
   const Rotaconfiguracao:string= '/home/paginas/configuracoes'
   const ConfigAtivo=pathname===Rotaconfiguracao
     return(

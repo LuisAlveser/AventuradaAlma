@@ -7,6 +7,7 @@ import { Paginacao } from "./Paginacao";
 import { useRouter } from "next/navigation";
 import Carregando from "@/app/Carregando";
 import { toast } from "sonner";
+import { Formulariohistoria } from "./FormularioHistoria";
 
 interface crianca{
       id: string;
@@ -42,6 +43,7 @@ export function CardCriancasSalvas(){
     const [paginaNav,setpaginaNav]=useState<number>(1)
     const [carregando,setcarregando]=useState<boolean>(false)
     const rota=useRouter()
+    const [formulariohistoria,setformulariohistoria]=useState<boolean>(false)
 
 useEffect(()=>{
    
@@ -161,14 +163,17 @@ const excluir=async (id:string)=>{
               )}
             </div>
              <button
+             onClick={()=>{setformulariohistoria(true)}}
                type="submit"
               className=" mt-4 cursor-pointer w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition-all text-xs tracking-wide shadow-md"
              >
                  Começar Conto
                 </button>
+
+                 {formulariohistoria?<Formulariohistoria setformulariohistoria={setformulariohistoria} crianca={item}/>:null}
           </div>
         ))):(<h1 className="text-blue-600 justify-center ">Nenhuma criança cadastrada</h1>)}
-       
+        
           
         
          
