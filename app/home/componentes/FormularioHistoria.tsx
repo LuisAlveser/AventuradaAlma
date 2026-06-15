@@ -49,18 +49,27 @@ export function Formulariohistoria({setformulariohistoria,crianca}:Props){
     resolver:zodResolver(HistoriaFormulario)
    })
 
-  const ir_para_historia=(data:HistoriaConteudo)=>{
+  const ir_para_historia=async (data:HistoriaConteudo)=>{
              try {
                 setcarregando(true)
-               
-              setDados({
+                const resposta =await fetch(`http://localhost:3000/api/usuario/historiasgeradas`,{
+        method:"GET"
+     })
+             if(resposta.status===200){
+                  setDados({
                 crianca,
                 conteudo:data.conteudoHistoria
               })
-          rota.push(`/home/paginas/historia`,)
+           return  rota.push(`/home/paginas/historia`,)
+             }
+             if(resposta.status==404){
+              
+              return   toast.error("Você  excedeu o número de histórias geradas")
+             }
+            
            } catch (error) {
-            console.log(error)
-                toast.error("Erro em gerar a História")
+            
+             return   toast.error("Erro em gerar a História")
              }finally{
                 setcarregando(false)
              }

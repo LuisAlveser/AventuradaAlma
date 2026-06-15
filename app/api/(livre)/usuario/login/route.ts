@@ -48,6 +48,7 @@ export async function POST(request:NextRequest) {
     
 
         } catch (error: any) {
+          console.log(error)
     if(error instanceof ZodError){
          return NextResponse.json({error:error.cause},{status:404})
     }

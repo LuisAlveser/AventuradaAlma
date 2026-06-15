@@ -20,9 +20,10 @@ interface Props {
 type UsuarioEsquemaLogin=z.infer<typeof UsuarioLogin>
 
 export function Login({ setlogin }: Props) {
-    const [mostrasenha, setmostraSenha] = useState(false);
-    const [carregando,setcarregando]=useState(false)
+    const [mostrasenha, setmostraSenha] = useState<boolean>(false);
+    const [carregando,setcarregando]=useState<boolean>(false)
      const router = useRouter();
+     const [recuperarSenha,setRecuperarSenha]=useState<boolean>(false)
     const {register,handleSubmit,formState:{errors}}=useForm<UsuarioEsquemaLogin>({
         resolver:zodResolver(UsuarioLogin)
     })
@@ -43,18 +44,17 @@ export function Login({ setlogin }: Props) {
             })
             if(response.status===201){
                  setlogin(false)
-                  setcarregando(false)
                 router.push("/home"); 
              toast.success("Login realizado com sucesso")
             }
             if(response.status===404){
-                   setcarregando(false)
+                  
                  toast.error("Email ou Senha inválidos")
             }
 
 
         } catch (error) {
-               setcarregando(false)
+              
            
             toast.success("Erro ao logar")
      } 
@@ -62,11 +62,41 @@ export function Login({ setlogin }: Props) {
            setcarregando(false)
      }
   };
+   const atualizarSenha = async (data: UsuarioEsquemaLogin) => {
+    try {
+            setcarregando(true)
+            const response =await fetch(("http://localhost:3000/api/usuario/info"),{
+               headers: {
+                'Content-Type': 'application/json',
+               },
+               method:"PATCH",
+              body: JSON.stringify({
+                email:data.email,
+                senha:data.senha
+              }),
+            })
+            if(response.status===200){
+             toast.success("Senha atualizada com sucesso")
+            }
+            if(response.status===404){
+                   
+                 toast.error("Esse email não existe")
+            }
+
+
+        } catch (error) {
+            toast.success("Erro ao atualizar senha")
+     } 
+     finally{
+           setlogin(false)
+           setcarregando(false)
+     }
+  };
 
   return (
     <div className="fixed inset-0 w-screen h-screen flex justify-center items-center bg-black/60 backdrop-blur-sm z-50 p-4">
       <form 
-        onSubmit={handleSubmit(login)} 
+        onSubmit={recuperarSenha ? handleSubmit(atualizarSenha) : handleSubmit(login)} 
         className="relative flex flex-col justify-center bg-white rounded-2xl gap-5 px-8 py-10 w-full max-w-md shadow-2xl transition-all scale-100"
       >
        
@@ -80,10 +110,17 @@ export function Login({ setlogin }: Props) {
         </button>
 
        
+       {recuperarSenha ?
+              <div className="text-center mb-2">
+          <h2 className="text-gray-800 text-2xl font-bold tracking-tight">Altere sua Senha</h2>
+         
+        </div>
+        :
         <div className="text-center mb-2">
           <h2 className="text-gray-800 text-2xl font-bold tracking-tight">Bem Vindo</h2>
           <p className="text-gray-500 text-sm mt-1">Começe a criar histórias</p>
         </div>
+       } 
 
        
     
@@ -104,7 +141,7 @@ export function Login({ setlogin }: Props) {
           {errors.email&&(<span className="text-red-500">{errors.email.message}</span>)}
         </div>
 
-        
+       
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700 pl-1">Senha</label>
           <div className="relative flex items-center">
@@ -132,11 +169,16 @@ export function Login({ setlogin }: Props) {
       
         <div className="flex flex-col gap-3 mt-4">
            <button disabled={carregando} className="rounded-2xl  cursor-pointer px-4 py-2  bg-blue-500 hover:bg-blue-700" >
-                              {carregando?<Carregando/>:"Entrar"}
+                              {carregando?<Carregando/>:recuperarSenha?"Alterar Senha":"Entrar"}
                             </button>
-          <p className="text-center text-xs text-gray-400 px-4">
-           Esqueceu sua senha ? <button className="cursor-pointer text-blue-500">Clique aqui!</button>
+
+          {recuperarSenha?
+             <p className="text-center text-xs text-gray-400 px-4">
+           Faça o Login <button onClick={()=>{setRecuperarSenha(!recuperarSenha)}} className="cursor-pointer text-blue-500">Clique aqui!</button>
           </p>
+          :<p className="text-center text-xs text-gray-400 px-4">
+           Esqueceu sua senha ? <button onClick={()=>{setRecuperarSenha(!recuperarSenha)}} className="cursor-pointer text-blue-500">Clique aqui!</button>
+          </p>}
         </div>
       </form>
     </div>
