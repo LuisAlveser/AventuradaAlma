@@ -387,8 +387,7 @@ export const ModelName = {
   Usuario: 'Usuario',
   Crianca: 'Crianca',
   Historia: 'Historia',
-  Imagem: 'Imagem',
-  Assinatura: 'Assinatura'
+  Imagem: 'Imagem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -404,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "crianca" | "historia" | "imagem" | "assinatura"
+    modelProps: "usuario" | "crianca" | "historia" | "imagem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -704,80 +703,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Assinatura: {
-      payload: Prisma.$AssinaturaPayload<ExtArgs>
-      fields: Prisma.AssinaturaFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AssinaturaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AssinaturaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        findFirst: {
-          args: Prisma.AssinaturaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AssinaturaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        findMany: {
-          args: Prisma.AssinaturaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>[]
-        }
-        create: {
-          args: Prisma.AssinaturaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        createMany: {
-          args: Prisma.AssinaturaCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.AssinaturaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>[]
-        }
-        delete: {
-          args: Prisma.AssinaturaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        update: {
-          args: Prisma.AssinaturaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        deleteMany: {
-          args: Prisma.AssinaturaDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AssinaturaUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.AssinaturaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>[]
-        }
-        upsert: {
-          args: Prisma.AssinaturaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssinaturaPayload>
-        }
-        aggregate: {
-          args: Prisma.AssinaturaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAssinatura>
-        }
-        groupBy: {
-          args: Prisma.AssinaturaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AssinaturaGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AssinaturaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AssinaturaCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -825,9 +750,11 @@ export const UsuarioScalarFieldEnum = {
   historias_salvas: 'historias_salvas',
   plano: 'plano',
   historias_geradas_no_mes: 'historias_geradas_no_mes',
-  data_proxima_renovacao: 'data_proxima_renovacao',
   foto_perfil: 'foto_perfil',
-  mes_referencia: 'mes_referencia'
+  mes_referencia: 'mes_referencia',
+  stripe_subscription_status: 'stripe_subscription_status',
+  stripe_subscription_id: 'stripe_subscription_id',
+  stripe_customer_id: 'stripe_customer_id'
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
@@ -854,7 +781,6 @@ export type CriancaScalarFieldEnum = (typeof CriancaScalarFieldEnum)[keyof typeo
 export const HistoriaScalarFieldEnum = {
   id: 'id',
   texto: 'texto',
-  nota: 'nota',
   crianca_id: 'crianca_id',
   criado_em: 'criado_em'
 } as const
@@ -869,20 +795,6 @@ export const ImagemScalarFieldEnum = {
 } as const
 
 export type ImagemScalarFieldEnum = (typeof ImagemScalarFieldEnum)[keyof typeof ImagemScalarFieldEnum]
-
-
-export const AssinaturaScalarFieldEnum = {
-  id: 'id',
-  usuario_id: 'usuario_id',
-  stripe_subscription_id: 'stripe_subscription_id',
-  stripe_customer_id: 'stripe_customer_id',
-  status: 'status',
-  periodo: 'periodo',
-  inicio: 'inicio',
-  fim: 'fim'
-} as const
-
-export type AssinaturaScalarFieldEnum = (typeof AssinaturaScalarFieldEnum)[keyof typeof AssinaturaScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -996,34 +908,6 @@ export type EnumalfabetizacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'alfabetizacao[]'
  */
 export type ListEnumalfabetizacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'alfabetizacao[]'>
-    
-
-
-/**
- * Reference to a field of type 'status'
- */
-export type EnumstatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'status'>
-    
-
-
-/**
- * Reference to a field of type 'status[]'
- */
-export type ListEnumstatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'status[]'>
-    
-
-
-/**
- * Reference to a field of type 'periodo'
- */
-export type EnumperiodoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'periodo'>
-    
-
-
-/**
- * Reference to a field of type 'periodo[]'
- */
-export type ListEnumperiodoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'periodo[]'>
     
 
 
@@ -1154,7 +1038,6 @@ export type GlobalOmitConfig = {
   crianca?: Prisma.CriancaOmit
   historia?: Prisma.HistoriaOmit
   imagem?: Prisma.ImagemOmit
-  assinatura?: Prisma.AssinaturaOmit
 }
 
 /* Types for Logging */

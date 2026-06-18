@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
-import { prisma } from "@/lib/prima";
+import { prisma } from "@/lib/prisma";
 import { email } from "zod";
 import { serialize } from 'cookie'
 

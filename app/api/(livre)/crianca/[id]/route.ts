@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from '@/lib/prima'
+import { prisma } from '@/lib/prisma'
 import { CriancaCadastro } from "@/app/modelos";
 import { supabase } from "../route";
 import { alfabetizacao, autismo } from "@/generated/prisma/enums";
@@ -112,7 +112,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 export async function DELETE( request: NextRequest,{params}:{params:Promise<{id:string}>}){
        try {
       const {id } =await params
-      console.log("ID ",id)
+     
       if(!id){
           return NextResponse.json({mesagem:"Id não encontrado"},{status:404})
       }

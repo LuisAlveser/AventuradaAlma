@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
-import { prisma } from "@/lib/prima";
+import { prisma } from "@/lib/prisma";
 interface UsuarioToken{
     id:string,
     nome:string,

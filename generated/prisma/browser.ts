@@ -37,8 +37,3 @@ export type Historia = Prisma.HistoriaModel
  * 
  */
 export type Imagem = Prisma.ImagemModel
-/**
- * Model Assinatura
- * 
- */
-export type Assinatura = Prisma.AssinaturaModel

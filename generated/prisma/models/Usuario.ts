@@ -44,9 +44,11 @@ export type UsuarioMinAggregateOutputType = {
   historias_salvas: number | null
   plano: $Enums.plano | null
   historias_geradas_no_mes: number | null
-  data_proxima_renovacao: Date | null
   foto_perfil: string | null
   mes_referencia: Date | null
+  stripe_subscription_status: string | null
+  stripe_subscription_id: string | null
+  stripe_customer_id: string | null
 }
 
 export type UsuarioMaxAggregateOutputType = {
@@ -57,9 +59,11 @@ export type UsuarioMaxAggregateOutputType = {
   historias_salvas: number | null
   plano: $Enums.plano | null
   historias_geradas_no_mes: number | null
-  data_proxima_renovacao: Date | null
   foto_perfil: string | null
   mes_referencia: Date | null
+  stripe_subscription_status: string | null
+  stripe_subscription_id: string | null
+  stripe_customer_id: string | null
 }
 
 export type UsuarioCountAggregateOutputType = {
@@ -70,9 +74,11 @@ export type UsuarioCountAggregateOutputType = {
   historias_salvas: number
   plano: number
   historias_geradas_no_mes: number
-  data_proxima_renovacao: number
   foto_perfil: number
   mes_referencia: number
+  stripe_subscription_status: number
+  stripe_subscription_id: number
+  stripe_customer_id: number
   _all: number
 }
 
@@ -95,9 +101,11 @@ export type UsuarioMinAggregateInputType = {
   historias_salvas?: true
   plano?: true
   historias_geradas_no_mes?: true
-  data_proxima_renovacao?: true
   foto_perfil?: true
   mes_referencia?: true
+  stripe_subscription_status?: true
+  stripe_subscription_id?: true
+  stripe_customer_id?: true
 }
 
 export type UsuarioMaxAggregateInputType = {
@@ -108,9 +116,11 @@ export type UsuarioMaxAggregateInputType = {
   historias_salvas?: true
   plano?: true
   historias_geradas_no_mes?: true
-  data_proxima_renovacao?: true
   foto_perfil?: true
   mes_referencia?: true
+  stripe_subscription_status?: true
+  stripe_subscription_id?: true
+  stripe_customer_id?: true
 }
 
 export type UsuarioCountAggregateInputType = {
@@ -121,9 +131,11 @@ export type UsuarioCountAggregateInputType = {
   historias_salvas?: true
   plano?: true
   historias_geradas_no_mes?: true
-  data_proxima_renovacao?: true
   foto_perfil?: true
   mes_referencia?: true
+  stripe_subscription_status?: true
+  stripe_subscription_id?: true
+  stripe_customer_id?: true
   _all?: true
 }
 
@@ -221,9 +233,11 @@ export type UsuarioGroupByOutputType = {
   historias_salvas: number | null
   plano: $Enums.plano
   historias_geradas_no_mes: number | null
-  data_proxima_renovacao: Date | null
   foto_perfil: string | null
   mes_referencia: Date
+  stripe_subscription_status: string | null
+  stripe_subscription_id: string | null
+  stripe_customer_id: string | null
   _count: UsuarioCountAggregateOutputType | null
   _avg: UsuarioAvgAggregateOutputType | null
   _sum: UsuarioSumAggregateOutputType | null
@@ -257,10 +271,11 @@ export type UsuarioWhereInput = {
   historias_salvas?: Prisma.IntNullableFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoFilter<"Usuario"> | $Enums.plano
   historias_geradas_no_mes?: Prisma.IntNullableFilter<"Usuario"> | number | null
-  data_proxima_renovacao?: Prisma.DateTimeNullableFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  assinatura?: Prisma.XOR<Prisma.AssinaturaNullableScalarRelationFilter, Prisma.AssinaturaWhereInput> | null
+  stripe_subscription_status?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  stripe_subscription_id?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  stripe_customer_id?: Prisma.StringNullableFilter<"Usuario"> | string | null
   crianca?: Prisma.CriancaListRelationFilter
 }
 
@@ -272,10 +287,11 @@ export type UsuarioOrderByWithRelationInput = {
   historias_salvas?: Prisma.SortOrderInput | Prisma.SortOrder
   plano?: Prisma.SortOrder
   historias_geradas_no_mes?: Prisma.SortOrderInput | Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrderInput | Prisma.SortOrder
   foto_perfil?: Prisma.SortOrderInput | Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
-  assinatura?: Prisma.AssinaturaOrderByWithRelationInput
+  stripe_subscription_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripe_subscription_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripe_customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   crianca?: Prisma.CriancaOrderByRelationAggregateInput
 }
 
@@ -290,10 +306,11 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   historias_salvas?: Prisma.IntNullableFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoFilter<"Usuario"> | $Enums.plano
   historias_geradas_no_mes?: Prisma.IntNullableFilter<"Usuario"> | number | null
-  data_proxima_renovacao?: Prisma.DateTimeNullableFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  assinatura?: Prisma.XOR<Prisma.AssinaturaNullableScalarRelationFilter, Prisma.AssinaturaWhereInput> | null
+  stripe_subscription_status?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  stripe_subscription_id?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  stripe_customer_id?: Prisma.StringNullableFilter<"Usuario"> | string | null
   crianca?: Prisma.CriancaListRelationFilter
 }, "id" | "email">
 
@@ -305,9 +322,11 @@ export type UsuarioOrderByWithAggregationInput = {
   historias_salvas?: Prisma.SortOrderInput | Prisma.SortOrder
   plano?: Prisma.SortOrder
   historias_geradas_no_mes?: Prisma.SortOrderInput | Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrderInput | Prisma.SortOrder
   foto_perfil?: Prisma.SortOrderInput | Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
+  stripe_subscription_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripe_subscription_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripe_customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UsuarioCountOrderByAggregateInput
   _avg?: Prisma.UsuarioAvgOrderByAggregateInput
   _max?: Prisma.UsuarioMaxOrderByAggregateInput
@@ -326,9 +345,11 @@ export type UsuarioScalarWhereWithAggregatesInput = {
   historias_salvas?: Prisma.IntNullableWithAggregatesFilter<"Usuario"> | number | null
   plano?: Prisma.EnumplanoWithAggregatesFilter<"Usuario"> | $Enums.plano
   historias_geradas_no_mes?: Prisma.IntNullableWithAggregatesFilter<"Usuario"> | number | null
-  data_proxima_renovacao?: Prisma.DateTimeNullableWithAggregatesFilter<"Usuario"> | Date | string | null
   foto_perfil?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
   mes_referencia?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+  stripe_subscription_status?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
+  stripe_subscription_id?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
+  stripe_customer_id?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
 }
 
 export type UsuarioCreateInput = {
@@ -339,10 +360,11 @@ export type UsuarioCreateInput = {
   historias_salvas?: number | null
   plano?: $Enums.plano
   historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
-  assinatura?: Prisma.AssinaturaCreateNestedOneWithoutUsuarioInput
+  stripe_subscription_status?: string | null
+  stripe_subscription_id?: string | null
+  stripe_customer_id?: string | null
   crianca?: Prisma.CriancaCreateNestedManyWithoutUsuarioInput
 }
 
@@ -354,10 +376,11 @@ export type UsuarioUncheckedCreateInput = {
   historias_salvas?: number | null
   plano?: $Enums.plano
   historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
-  assinatura?: Prisma.AssinaturaUncheckedCreateNestedOneWithoutUsuarioInput
+  stripe_subscription_status?: string | null
+  stripe_subscription_id?: string | null
+  stripe_customer_id?: string | null
   crianca?: Prisma.CriancaUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -369,10 +392,11 @@ export type UsuarioUpdateInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assinatura?: Prisma.AssinaturaUpdateOneWithoutUsuarioNestedInput
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   crianca?: Prisma.CriancaUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -384,10 +408,11 @@ export type UsuarioUncheckedUpdateInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assinatura?: Prisma.AssinaturaUncheckedUpdateOneWithoutUsuarioNestedInput
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   crianca?: Prisma.CriancaUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -399,9 +424,11 @@ export type UsuarioCreateManyInput = {
   historias_salvas?: number | null
   plano?: $Enums.plano
   historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
+  stripe_subscription_status?: string | null
+  stripe_subscription_id?: string | null
+  stripe_customer_id?: string | null
 }
 
 export type UsuarioUpdateManyMutationInput = {
@@ -412,9 +439,11 @@ export type UsuarioUpdateManyMutationInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UsuarioUncheckedUpdateManyInput = {
@@ -425,9 +454,11 @@ export type UsuarioUncheckedUpdateManyInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UsuarioCountOrderByAggregateInput = {
@@ -438,9 +469,11 @@ export type UsuarioCountOrderByAggregateInput = {
   historias_salvas?: Prisma.SortOrder
   plano?: Prisma.SortOrder
   historias_geradas_no_mes?: Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrder
   foto_perfil?: Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
+  stripe_subscription_status?: Prisma.SortOrder
+  stripe_subscription_id?: Prisma.SortOrder
+  stripe_customer_id?: Prisma.SortOrder
 }
 
 export type UsuarioAvgOrderByAggregateInput = {
@@ -456,9 +489,11 @@ export type UsuarioMaxOrderByAggregateInput = {
   historias_salvas?: Prisma.SortOrder
   plano?: Prisma.SortOrder
   historias_geradas_no_mes?: Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrder
   foto_perfil?: Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
+  stripe_subscription_status?: Prisma.SortOrder
+  stripe_subscription_id?: Prisma.SortOrder
+  stripe_customer_id?: Prisma.SortOrder
 }
 
 export type UsuarioMinOrderByAggregateInput = {
@@ -469,9 +504,11 @@ export type UsuarioMinOrderByAggregateInput = {
   historias_salvas?: Prisma.SortOrder
   plano?: Prisma.SortOrder
   historias_geradas_no_mes?: Prisma.SortOrder
-  data_proxima_renovacao?: Prisma.SortOrder
   foto_perfil?: Prisma.SortOrder
   mes_referencia?: Prisma.SortOrder
+  stripe_subscription_status?: Prisma.SortOrder
+  stripe_subscription_id?: Prisma.SortOrder
+  stripe_customer_id?: Prisma.SortOrder
 }
 
 export type UsuarioSumOrderByAggregateInput = {
@@ -500,10 +537,6 @@ export type EnumplanoFieldUpdateOperationsInput = {
   set?: $Enums.plano
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
@@ -526,20 +559,6 @@ export type UsuarioUpdateOneRequiredWithoutCriancaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutCriancaInput, Prisma.UsuarioUpdateWithoutCriancaInput>, Prisma.UsuarioUncheckedUpdateWithoutCriancaInput>
 }
 
-export type UsuarioCreateNestedOneWithoutAssinaturaInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutAssinaturaInput, Prisma.UsuarioUncheckedCreateWithoutAssinaturaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutAssinaturaInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutAssinaturaNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutAssinaturaInput, Prisma.UsuarioUncheckedCreateWithoutAssinaturaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutAssinaturaInput
-  upsert?: Prisma.UsuarioUpsertWithoutAssinaturaInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutAssinaturaInput, Prisma.UsuarioUpdateWithoutAssinaturaInput>, Prisma.UsuarioUncheckedUpdateWithoutAssinaturaInput>
-}
-
 export type UsuarioCreateWithoutCriancaInput = {
   id?: string
   nome: string
@@ -548,10 +567,11 @@ export type UsuarioCreateWithoutCriancaInput = {
   historias_salvas?: number | null
   plano?: $Enums.plano
   historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
-  assinatura?: Prisma.AssinaturaCreateNestedOneWithoutUsuarioInput
+  stripe_subscription_status?: string | null
+  stripe_subscription_id?: string | null
+  stripe_customer_id?: string | null
 }
 
 export type UsuarioUncheckedCreateWithoutCriancaInput = {
@@ -562,10 +582,11 @@ export type UsuarioUncheckedCreateWithoutCriancaInput = {
   historias_salvas?: number | null
   plano?: $Enums.plano
   historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
   foto_perfil?: string | null
   mes_referencia?: Date | string
-  assinatura?: Prisma.AssinaturaUncheckedCreateNestedOneWithoutUsuarioInput
+  stripe_subscription_status?: string | null
+  stripe_subscription_id?: string | null
+  stripe_customer_id?: string | null
 }
 
 export type UsuarioCreateOrConnectWithoutCriancaInput = {
@@ -592,10 +613,11 @@ export type UsuarioUpdateWithoutCriancaInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assinatura?: Prisma.AssinaturaUpdateOneWithoutUsuarioNestedInput
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UsuarioUncheckedUpdateWithoutCriancaInput = {
@@ -606,82 +628,11 @@ export type UsuarioUncheckedUpdateWithoutCriancaInput = {
   historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
   historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assinatura?: Prisma.AssinaturaUncheckedUpdateOneWithoutUsuarioNestedInput
-}
-
-export type UsuarioCreateWithoutAssinaturaInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  historias_salvas?: number | null
-  plano?: $Enums.plano
-  historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
-  foto_perfil?: string | null
-  mes_referencia?: Date | string
-  crianca?: Prisma.CriancaCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioUncheckedCreateWithoutAssinaturaInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  historias_salvas?: number | null
-  plano?: $Enums.plano
-  historias_geradas_no_mes?: number | null
-  data_proxima_renovacao?: Date | string | null
-  foto_perfil?: string | null
-  mes_referencia?: Date | string
-  crianca?: Prisma.CriancaUncheckedCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioCreateOrConnectWithoutAssinaturaInput = {
-  where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutAssinaturaInput, Prisma.UsuarioUncheckedCreateWithoutAssinaturaInput>
-}
-
-export type UsuarioUpsertWithoutAssinaturaInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutAssinaturaInput, Prisma.UsuarioUncheckedUpdateWithoutAssinaturaInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutAssinaturaInput, Prisma.UsuarioUncheckedCreateWithoutAssinaturaInput>
-  where?: Prisma.UsuarioWhereInput
-}
-
-export type UsuarioUpdateToOneWithWhereWithoutAssinaturaInput = {
-  where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutAssinaturaInput, Prisma.UsuarioUncheckedUpdateWithoutAssinaturaInput>
-}
-
-export type UsuarioUpdateWithoutAssinaturaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  crianca?: Prisma.CriancaUpdateManyWithoutUsuarioNestedInput
-}
-
-export type UsuarioUncheckedUpdateWithoutAssinaturaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  historias_salvas?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  plano?: Prisma.EnumplanoFieldUpdateOperationsInput | $Enums.plano
-  historias_geradas_no_mes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  data_proxima_renovacao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  foto_perfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  mes_referencia?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  crianca?: Prisma.CriancaUncheckedUpdateManyWithoutUsuarioNestedInput
+  stripe_subscription_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_subscription_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -723,10 +674,11 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   historias_salvas?: boolean
   plano?: boolean
   historias_geradas_no_mes?: boolean
-  data_proxima_renovacao?: boolean
   foto_perfil?: boolean
   mes_referencia?: boolean
-  assinatura?: boolean | Prisma.Usuario$assinaturaArgs<ExtArgs>
+  stripe_subscription_status?: boolean
+  stripe_subscription_id?: boolean
+  stripe_customer_id?: boolean
   crianca?: boolean | Prisma.Usuario$criancaArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
@@ -739,9 +691,11 @@ export type UsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   historias_salvas?: boolean
   plano?: boolean
   historias_geradas_no_mes?: boolean
-  data_proxima_renovacao?: boolean
   foto_perfil?: boolean
   mes_referencia?: boolean
+  stripe_subscription_status?: boolean
+  stripe_subscription_id?: boolean
+  stripe_customer_id?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -752,9 +706,11 @@ export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   historias_salvas?: boolean
   plano?: boolean
   historias_geradas_no_mes?: boolean
-  data_proxima_renovacao?: boolean
   foto_perfil?: boolean
   mes_referencia?: boolean
+  stripe_subscription_status?: boolean
+  stripe_subscription_id?: boolean
+  stripe_customer_id?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectScalar = {
@@ -765,14 +721,15 @@ export type UsuarioSelectScalar = {
   historias_salvas?: boolean
   plano?: boolean
   historias_geradas_no_mes?: boolean
-  data_proxima_renovacao?: boolean
   foto_perfil?: boolean
   mes_referencia?: boolean
+  stripe_subscription_status?: boolean
+  stripe_subscription_id?: boolean
+  stripe_customer_id?: boolean
 }
 
-export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "historias_salvas" | "plano" | "historias_geradas_no_mes" | "data_proxima_renovacao" | "foto_perfil" | "mes_referencia", ExtArgs["result"]["usuario"]>
+export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "historias_salvas" | "plano" | "historias_geradas_no_mes" | "foto_perfil" | "mes_referencia" | "stripe_subscription_status" | "stripe_subscription_id" | "stripe_customer_id", ExtArgs["result"]["usuario"]>
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  assinatura?: boolean | Prisma.Usuario$assinaturaArgs<ExtArgs>
   crianca?: boolean | Prisma.Usuario$criancaArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -782,7 +739,6 @@ export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Usuario"
   objects: {
-    assinatura: Prisma.$AssinaturaPayload<ExtArgs> | null
     crianca: Prisma.$CriancaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -793,9 +749,11 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     historias_salvas: number | null
     plano: $Enums.plano
     historias_geradas_no_mes: number | null
-    data_proxima_renovacao: Date | null
     foto_perfil: string | null
     mes_referencia: Date
+    stripe_subscription_status: string | null
+    stripe_subscription_id: string | null
+    stripe_customer_id: string | null
   }, ExtArgs["result"]["usuario"]>
   composites: {}
 }
@@ -1190,7 +1148,6 @@ readonly fields: UsuarioFieldRefs;
  */
 export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  assinatura<T extends Prisma.Usuario$assinaturaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$assinaturaArgs<ExtArgs>>): Prisma.Prisma__AssinaturaClient<runtime.Types.Result.GetResult<Prisma.$AssinaturaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   crianca<T extends Prisma.Usuario$criancaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$criancaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CriancaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1228,9 +1185,11 @@ export interface UsuarioFieldRefs {
   readonly historias_salvas: Prisma.FieldRef<"Usuario", 'Int'>
   readonly plano: Prisma.FieldRef<"Usuario", 'plano'>
   readonly historias_geradas_no_mes: Prisma.FieldRef<"Usuario", 'Int'>
-  readonly data_proxima_renovacao: Prisma.FieldRef<"Usuario", 'DateTime'>
   readonly foto_perfil: Prisma.FieldRef<"Usuario", 'String'>
   readonly mes_referencia: Prisma.FieldRef<"Usuario", 'DateTime'>
+  readonly stripe_subscription_status: Prisma.FieldRef<"Usuario", 'String'>
+  readonly stripe_subscription_id: Prisma.FieldRef<"Usuario", 'String'>
+  readonly stripe_customer_id: Prisma.FieldRef<"Usuario", 'String'>
 }
     
 
@@ -1621,25 +1580,6 @@ export type UsuarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Usuarios to delete.
    */
   limit?: number
-}
-
-/**
- * Usuario.assinatura
- */
-export type Usuario$assinaturaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Assinatura
-   */
-  select?: Prisma.AssinaturaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Assinatura
-   */
-  omit?: Prisma.AssinaturaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AssinaturaInclude<ExtArgs> | null
-  where?: Prisma.AssinaturaWhereInput
 }
 
 /**

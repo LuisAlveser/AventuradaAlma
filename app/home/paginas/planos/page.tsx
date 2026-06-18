@@ -1,10 +1,40 @@
 'use client'
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { IoMdClose, IoMdCheckmarkCircle } from "react-icons/io";
 import router from "next/navigation"
-
+import { toast } from "sonner";
+import Carregando from "@/app/Carregando";
+ 
+interface Url{
+    sessao:{
+    url:string
+}
+}
 
 export default function PlanosHome() {
+     const[carregando_plano_basico,setcarregando_plano_basico]=useState<boolean>(false)
+      const[carregando_plano_pro,setcarregando_plano_pro]=useState<boolean>(false)
+
+    const comprar_plano=async (plano:string)=>{
+        try {
+        plano==="BASICO"? setcarregando_plano_basico(true):setcarregando_plano_pro(true)
+        const resposta=await fetch("http://localhost:3000/api/usuario/info",{
+            method:"POST",
+            body:JSON.stringify(plano)
+        })  
+        if(resposta.status===200){
+            const url: Url = await resposta.json()
+            rota.push(url.sessao.url)
+        }
+        if(resposta.status===500){
+            toast.error("Erro no direcionamento para pagamento")
+        }
+        } catch (error) {
+             toast.error("Erro no servidor")
+        }finally{
+            plano==="BASICO"? setcarregando_plano_basico(false):setcarregando_plano_pro(false)
+        }
+    }
     const rota=router.useRouter()
     const voltar=()=>{
         rota.back()
@@ -42,7 +72,7 @@ export default function PlanosHome() {
         
         <div className="flex-1 flex flex-col bg-blue-600 border-2 border-blue-400 p-8 rounded-3xl text-white shadow-2xl shadow-blue-500/20 transform md:scale-110 z-10 relative">
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-400 text-blue-900 text-xs font-bold px-3 py-1 rounded-full uppercase">
-            Mais Popular
+           Mais Popular
           </div>
           <h2 className="text-xl font-medium text-blue-100">Básico</h2>
           <div className="my-6">
@@ -55,8 +85,8 @@ export default function PlanosHome() {
               <Feature text=" Salve até 10 crianças" />
             <Feature text="Imagens inclusas" />
           </ul>
-          <button className=" cursor-pointer w-full py-3 rounded-xl bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors shadow-lg">
-          Assinar
+          <button onClick={()=>{comprar_plano("BASICO")}} className=" cursor-pointer w-full py-3 rounded-xl bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors shadow-lg">
+          {carregando_plano_basico?<Carregando/>:" Assinar"}  
           </button>
         </div>
 
@@ -73,8 +103,8 @@ export default function PlanosHome() {
               <Feature text=" Salve até 50 crianças" />
             <Feature text="Imagens inclusas" />
           </ul>
-          <button className=" cursor-pointer w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 transition-colors border border-blue-400">
-            Assinar
+          <button onClick={()=>{comprar_plano("PRO")}} className=" cursor-pointer w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 transition-colors border border-blue-400">
+            {carregando_plano_pro?<Carregando/>:" Assinar"}  
           </button>
         </div>
 

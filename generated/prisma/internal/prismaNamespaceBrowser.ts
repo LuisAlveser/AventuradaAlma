@@ -54,8 +54,7 @@ export const ModelName = {
   Usuario: 'Usuario',
   Crianca: 'Crianca',
   Historia: 'Historia',
-  Imagem: 'Imagem',
-  Assinatura: 'Assinatura'
+  Imagem: 'Imagem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,9 +81,11 @@ export const UsuarioScalarFieldEnum = {
   historias_salvas: 'historias_salvas',
   plano: 'plano',
   historias_geradas_no_mes: 'historias_geradas_no_mes',
-  data_proxima_renovacao: 'data_proxima_renovacao',
   foto_perfil: 'foto_perfil',
-  mes_referencia: 'mes_referencia'
+  mes_referencia: 'mes_referencia',
+  stripe_subscription_status: 'stripe_subscription_status',
+  stripe_subscription_id: 'stripe_subscription_id',
+  stripe_customer_id: 'stripe_customer_id'
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
@@ -111,7 +112,6 @@ export type CriancaScalarFieldEnum = (typeof CriancaScalarFieldEnum)[keyof typeo
 export const HistoriaScalarFieldEnum = {
   id: 'id',
   texto: 'texto',
-  nota: 'nota',
   crianca_id: 'crianca_id',
   criado_em: 'criado_em'
 } as const
@@ -126,20 +126,6 @@ export const ImagemScalarFieldEnum = {
 } as const
 
 export type ImagemScalarFieldEnum = (typeof ImagemScalarFieldEnum)[keyof typeof ImagemScalarFieldEnum]
-
-
-export const AssinaturaScalarFieldEnum = {
-  id: 'id',
-  usuario_id: 'usuario_id',
-  stripe_subscription_id: 'stripe_subscription_id',
-  stripe_customer_id: 'stripe_customer_id',
-  status: 'status',
-  periodo: 'periodo',
-  inicio: 'inicio',
-  fim: 'fim'
-} as const
-
-export type AssinaturaScalarFieldEnum = (typeof AssinaturaScalarFieldEnum)[keyof typeof AssinaturaScalarFieldEnum]
 
 
 export const SortOrder = {

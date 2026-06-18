@@ -20,24 +20,13 @@ export type HistoriaModel = runtime.Types.Result.DefaultSelection<Prisma.$Histor
 
 export type AggregateHistoria = {
   _count: HistoriaCountAggregateOutputType | null
-  _avg: HistoriaAvgAggregateOutputType | null
-  _sum: HistoriaSumAggregateOutputType | null
   _min: HistoriaMinAggregateOutputType | null
   _max: HistoriaMaxAggregateOutputType | null
-}
-
-export type HistoriaAvgAggregateOutputType = {
-  nota: number | null
-}
-
-export type HistoriaSumAggregateOutputType = {
-  nota: number | null
 }
 
 export type HistoriaMinAggregateOutputType = {
   id: string | null
   texto: string | null
-  nota: number | null
   crianca_id: string | null
   criado_em: Date | null
 }
@@ -45,7 +34,6 @@ export type HistoriaMinAggregateOutputType = {
 export type HistoriaMaxAggregateOutputType = {
   id: string | null
   texto: string | null
-  nota: number | null
   crianca_id: string | null
   criado_em: Date | null
 }
@@ -53,25 +41,15 @@ export type HistoriaMaxAggregateOutputType = {
 export type HistoriaCountAggregateOutputType = {
   id: number
   texto: number
-  nota: number
   crianca_id: number
   criado_em: number
   _all: number
 }
 
 
-export type HistoriaAvgAggregateInputType = {
-  nota?: true
-}
-
-export type HistoriaSumAggregateInputType = {
-  nota?: true
-}
-
 export type HistoriaMinAggregateInputType = {
   id?: true
   texto?: true
-  nota?: true
   crianca_id?: true
   criado_em?: true
 }
@@ -79,7 +57,6 @@ export type HistoriaMinAggregateInputType = {
 export type HistoriaMaxAggregateInputType = {
   id?: true
   texto?: true
-  nota?: true
   crianca_id?: true
   criado_em?: true
 }
@@ -87,7 +64,6 @@ export type HistoriaMaxAggregateInputType = {
 export type HistoriaCountAggregateInputType = {
   id?: true
   texto?: true
-  nota?: true
   crianca_id?: true
   criado_em?: true
   _all?: true
@@ -131,18 +107,6 @@ export type HistoriaAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: HistoriaAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: HistoriaSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: HistoriaMinAggregateInputType
@@ -173,8 +137,6 @@ export type HistoriaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: HistoriaCountAggregateInputType | true
-  _avg?: HistoriaAvgAggregateInputType
-  _sum?: HistoriaSumAggregateInputType
   _min?: HistoriaMinAggregateInputType
   _max?: HistoriaMaxAggregateInputType
 }
@@ -182,12 +144,9 @@ export type HistoriaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type HistoriaGroupByOutputType = {
   id: string
   texto: string
-  nota: number | null
   crianca_id: string | null
   criado_em: Date
   _count: HistoriaCountAggregateOutputType | null
-  _avg: HistoriaAvgAggregateOutputType | null
-  _sum: HistoriaSumAggregateOutputType | null
   _min: HistoriaMinAggregateOutputType | null
   _max: HistoriaMaxAggregateOutputType | null
 }
@@ -213,7 +172,6 @@ export type HistoriaWhereInput = {
   NOT?: Prisma.HistoriaWhereInput | Prisma.HistoriaWhereInput[]
   id?: Prisma.StringFilter<"Historia"> | string
   texto?: Prisma.StringFilter<"Historia"> | string
-  nota?: Prisma.IntNullableFilter<"Historia"> | number | null
   crianca_id?: Prisma.StringNullableFilter<"Historia"> | string | null
   criado_em?: Prisma.DateTimeFilter<"Historia"> | Date | string
   imagem?: Prisma.ImagemListRelationFilter
@@ -223,7 +181,6 @@ export type HistoriaWhereInput = {
 export type HistoriaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   texto?: Prisma.SortOrder
-  nota?: Prisma.SortOrderInput | Prisma.SortOrder
   crianca_id?: Prisma.SortOrderInput | Prisma.SortOrder
   criado_em?: Prisma.SortOrder
   imagem?: Prisma.ImagemOrderByRelationAggregateInput
@@ -236,7 +193,6 @@ export type HistoriaWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.HistoriaWhereInput[]
   NOT?: Prisma.HistoriaWhereInput | Prisma.HistoriaWhereInput[]
   texto?: Prisma.StringFilter<"Historia"> | string
-  nota?: Prisma.IntNullableFilter<"Historia"> | number | null
   crianca_id?: Prisma.StringNullableFilter<"Historia"> | string | null
   criado_em?: Prisma.DateTimeFilter<"Historia"> | Date | string
   imagem?: Prisma.ImagemListRelationFilter
@@ -246,14 +202,11 @@ export type HistoriaWhereUniqueInput = Prisma.AtLeast<{
 export type HistoriaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   texto?: Prisma.SortOrder
-  nota?: Prisma.SortOrderInput | Prisma.SortOrder
   crianca_id?: Prisma.SortOrderInput | Prisma.SortOrder
   criado_em?: Prisma.SortOrder
   _count?: Prisma.HistoriaCountOrderByAggregateInput
-  _avg?: Prisma.HistoriaAvgOrderByAggregateInput
   _max?: Prisma.HistoriaMaxOrderByAggregateInput
   _min?: Prisma.HistoriaMinOrderByAggregateInput
-  _sum?: Prisma.HistoriaSumOrderByAggregateInput
 }
 
 export type HistoriaScalarWhereWithAggregatesInput = {
@@ -262,7 +215,6 @@ export type HistoriaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.HistoriaScalarWhereWithAggregatesInput | Prisma.HistoriaScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Historia"> | string
   texto?: Prisma.StringWithAggregatesFilter<"Historia"> | string
-  nota?: Prisma.IntNullableWithAggregatesFilter<"Historia"> | number | null
   crianca_id?: Prisma.StringNullableWithAggregatesFilter<"Historia"> | string | null
   criado_em?: Prisma.DateTimeWithAggregatesFilter<"Historia"> | Date | string
 }
@@ -270,7 +222,6 @@ export type HistoriaScalarWhereWithAggregatesInput = {
 export type HistoriaCreateInput = {
   id?: string
   texto: string
-  nota?: number | null
   criado_em?: Date | string
   imagem?: Prisma.ImagemCreateNestedManyWithoutHistoriaInput
   crianca?: Prisma.CriancaCreateNestedOneWithoutHistoriaInput
@@ -279,7 +230,6 @@ export type HistoriaCreateInput = {
 export type HistoriaUncheckedCreateInput = {
   id?: string
   texto: string
-  nota?: number | null
   crianca_id?: string | null
   criado_em?: Date | string
   imagem?: Prisma.ImagemUncheckedCreateNestedManyWithoutHistoriaInput
@@ -288,7 +238,6 @@ export type HistoriaUncheckedCreateInput = {
 export type HistoriaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imagem?: Prisma.ImagemUpdateManyWithoutHistoriaNestedInput
   crianca?: Prisma.CriancaUpdateOneWithoutHistoriaNestedInput
@@ -297,7 +246,6 @@ export type HistoriaUpdateInput = {
 export type HistoriaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   crianca_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imagem?: Prisma.ImagemUncheckedUpdateManyWithoutHistoriaNestedInput
@@ -306,7 +254,6 @@ export type HistoriaUncheckedUpdateInput = {
 export type HistoriaCreateManyInput = {
   id?: string
   texto: string
-  nota?: number | null
   crianca_id?: string | null
   criado_em?: Date | string
 }
@@ -314,14 +261,12 @@ export type HistoriaCreateManyInput = {
 export type HistoriaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HistoriaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   crianca_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -339,19 +284,13 @@ export type HistoriaOrderByRelationAggregateInput = {
 export type HistoriaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   texto?: Prisma.SortOrder
-  nota?: Prisma.SortOrder
   crianca_id?: Prisma.SortOrder
   criado_em?: Prisma.SortOrder
-}
-
-export type HistoriaAvgOrderByAggregateInput = {
-  nota?: Prisma.SortOrder
 }
 
 export type HistoriaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   texto?: Prisma.SortOrder
-  nota?: Prisma.SortOrder
   crianca_id?: Prisma.SortOrder
   criado_em?: Prisma.SortOrder
 }
@@ -359,13 +298,8 @@ export type HistoriaMaxOrderByAggregateInput = {
 export type HistoriaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   texto?: Prisma.SortOrder
-  nota?: Prisma.SortOrder
   crianca_id?: Prisma.SortOrder
   criado_em?: Prisma.SortOrder
-}
-
-export type HistoriaSumOrderByAggregateInput = {
-  nota?: Prisma.SortOrder
 }
 
 export type HistoriaScalarRelationFilter = {
@@ -432,7 +366,6 @@ export type HistoriaUpdateOneRequiredWithoutImagemNestedInput = {
 export type HistoriaCreateWithoutCriancaInput = {
   id?: string
   texto: string
-  nota?: number | null
   criado_em?: Date | string
   imagem?: Prisma.ImagemCreateNestedManyWithoutHistoriaInput
 }
@@ -440,7 +373,6 @@ export type HistoriaCreateWithoutCriancaInput = {
 export type HistoriaUncheckedCreateWithoutCriancaInput = {
   id?: string
   texto: string
-  nota?: number | null
   criado_em?: Date | string
   imagem?: Prisma.ImagemUncheckedCreateNestedManyWithoutHistoriaInput
 }
@@ -477,7 +409,6 @@ export type HistoriaScalarWhereInput = {
   NOT?: Prisma.HistoriaScalarWhereInput | Prisma.HistoriaScalarWhereInput[]
   id?: Prisma.StringFilter<"Historia"> | string
   texto?: Prisma.StringFilter<"Historia"> | string
-  nota?: Prisma.IntNullableFilter<"Historia"> | number | null
   crianca_id?: Prisma.StringNullableFilter<"Historia"> | string | null
   criado_em?: Prisma.DateTimeFilter<"Historia"> | Date | string
 }
@@ -485,7 +416,6 @@ export type HistoriaScalarWhereInput = {
 export type HistoriaCreateWithoutImagemInput = {
   id?: string
   texto: string
-  nota?: number | null
   criado_em?: Date | string
   crianca?: Prisma.CriancaCreateNestedOneWithoutHistoriaInput
 }
@@ -493,7 +423,6 @@ export type HistoriaCreateWithoutImagemInput = {
 export type HistoriaUncheckedCreateWithoutImagemInput = {
   id?: string
   texto: string
-  nota?: number | null
   crianca_id?: string | null
   criado_em?: Date | string
 }
@@ -517,7 +446,6 @@ export type HistoriaUpdateToOneWithWhereWithoutImagemInput = {
 export type HistoriaUpdateWithoutImagemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   crianca?: Prisma.CriancaUpdateOneWithoutHistoriaNestedInput
 }
@@ -525,7 +453,6 @@ export type HistoriaUpdateWithoutImagemInput = {
 export type HistoriaUncheckedUpdateWithoutImagemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   crianca_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -533,14 +460,12 @@ export type HistoriaUncheckedUpdateWithoutImagemInput = {
 export type HistoriaCreateManyCriancaInput = {
   id?: string
   texto: string
-  nota?: number | null
   criado_em?: Date | string
 }
 
 export type HistoriaUpdateWithoutCriancaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imagem?: Prisma.ImagemUpdateManyWithoutHistoriaNestedInput
 }
@@ -548,7 +473,6 @@ export type HistoriaUpdateWithoutCriancaInput = {
 export type HistoriaUncheckedUpdateWithoutCriancaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imagem?: Prisma.ImagemUncheckedUpdateManyWithoutHistoriaNestedInput
 }
@@ -556,7 +480,6 @@ export type HistoriaUncheckedUpdateWithoutCriancaInput = {
 export type HistoriaUncheckedUpdateManyWithoutCriancaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   texto?: Prisma.StringFieldUpdateOperationsInput | string
-  nota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_em?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -594,7 +517,6 @@ export type HistoriaCountOutputTypeCountImagemArgs<ExtArgs extends runtime.Types
 export type HistoriaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   texto?: boolean
-  nota?: boolean
   crianca_id?: boolean
   criado_em?: boolean
   imagem?: boolean | Prisma.Historia$imagemArgs<ExtArgs>
@@ -605,7 +527,6 @@ export type HistoriaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type HistoriaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   texto?: boolean
-  nota?: boolean
   crianca_id?: boolean
   criado_em?: boolean
   crianca?: boolean | Prisma.Historia$criancaArgs<ExtArgs>
@@ -614,7 +535,6 @@ export type HistoriaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type HistoriaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   texto?: boolean
-  nota?: boolean
   crianca_id?: boolean
   criado_em?: boolean
   crianca?: boolean | Prisma.Historia$criancaArgs<ExtArgs>
@@ -623,12 +543,11 @@ export type HistoriaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type HistoriaSelectScalar = {
   id?: boolean
   texto?: boolean
-  nota?: boolean
   crianca_id?: boolean
   criado_em?: boolean
 }
 
-export type HistoriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "texto" | "nota" | "crianca_id" | "criado_em", ExtArgs["result"]["historia"]>
+export type HistoriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "texto" | "crianca_id" | "criado_em", ExtArgs["result"]["historia"]>
 export type HistoriaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   imagem?: boolean | Prisma.Historia$imagemArgs<ExtArgs>
   crianca?: boolean | Prisma.Historia$criancaArgs<ExtArgs>
@@ -650,7 +569,6 @@ export type $HistoriaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     texto: string
-    nota: number | null
     crianca_id: string | null
     criado_em: Date
   }, ExtArgs["result"]["historia"]>
@@ -1080,7 +998,6 @@ export interface Prisma__HistoriaClient<T, Null = never, ExtArgs extends runtime
 export interface HistoriaFieldRefs {
   readonly id: Prisma.FieldRef<"Historia", 'String'>
   readonly texto: Prisma.FieldRef<"Historia", 'String'>
-  readonly nota: Prisma.FieldRef<"Historia", 'Int'>
   readonly crianca_id: Prisma.FieldRef<"Historia", 'String'>
   readonly criado_em: Prisma.FieldRef<"Historia", 'DateTime'>
 }

@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import {Botao} from "./Botao"
 import Image from "next/image"
-import { FormularioUsuario } from "./FormularioCadastroUsuario"
+
 
 interface Props{
     setcadastro:Dispatch<SetStateAction<boolean>>

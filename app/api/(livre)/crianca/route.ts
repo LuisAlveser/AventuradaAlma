@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import {CriancaCadastro} from "@/app/modelos"
 import { autismo,alfabetizacao, Usuario, plano } from '@/generated/prisma/client'
-import { prisma } from '@/lib/prima'
+import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
 import { ZodError } from 'zod'

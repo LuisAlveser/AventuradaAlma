@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from "next/server" 
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   
   let cookie = request.cookies.get('auth_token')
 

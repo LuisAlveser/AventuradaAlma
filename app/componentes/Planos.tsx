@@ -32,7 +32,7 @@ export function Planos({ setplanos }: Props) {
             <Feature text="Sem imagens" crossout />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 transition-colors">
-            Começar agora
+             Você já está nesse plano
           </button>
         </div>
 

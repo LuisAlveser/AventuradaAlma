@@ -27,10 +27,11 @@ model Usuario{
   historias_salvas Int?
   plano    plano @default(FREE) 
   historias_geradas_no_mes Int?
-  data_proxima_renovacao  DateTime ?
   foto_perfil  String ?
   mes_referencia DateTime @default(now()) 
-  assinatura Assinatura?
+  stripe_subscription_status String?
+  stripe_subscription_id String?
+  stripe_customer_id  String?
   crianca   Crianca[]  
 }
 
@@ -68,8 +69,7 @@ model  Crianca{
 model Historia{
 id String @id @default(uuid())
 texto  String
-imagem Imagem[]
-nota Int?
+imagem  Imagem[]
 crianca_id  String ?
 criado_em DateTime @default(now())
 crianca Crianca ? @relation(fields: [crianca_id], references: [id],onDelete: Cascade)
@@ -79,26 +79,8 @@ model Imagem{
   id String @id @default(uuid())
   conteudo String
   historia_id String
-  historia Historia @relation(fields: [historia_id], references: [id],onDelete: Cascade )
-}
-enum status {
-  ATIVO
-  CANCELADO
-  VENCIDO
-}
-enum periodo {
-  MENSAL
-  ANUAL
+  historia Historia  @relation(fields: [historia_id], references: [id],onDelete: Cascade )
 }
 
-model Assinatura{
-id String @id @default(uuid())
- usuario_id  String @unique
- usuario Usuario @relation(fields: [usuario_id],references: [id])
- stripe_subscription_id String
- stripe_customer_id  String
- status status 
- periodo  periodo
- inicio DateTime
- fim DateTime 
-}
+
+

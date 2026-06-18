@@ -36,20 +36,3 @@ export const alfabetizacao = {
 } as const
 
 export type alfabetizacao = (typeof alfabetizacao)[keyof typeof alfabetizacao]
-
-
-export const status = {
-  ATIVO: 'ATIVO',
-  CANCELADO: 'CANCELADO',
-  VENCIDO: 'VENCIDO'
-} as const
-
-export type status = (typeof status)[keyof typeof status]
-
-
-export const periodo = {
-  MENSAL: 'MENSAL',
-  ANUAL: 'ANUAL'
-} as const
-
-export type periodo = (typeof periodo)[keyof typeof periodo]

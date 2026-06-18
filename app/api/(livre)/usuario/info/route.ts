@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
-import { prisma } from "@/lib/prima"
+import { prisma } from "@/lib/prisma"
 import { plano } from "@/generated/prisma/enums";
 import bcrypt from"bcrypt"
 import { UsuarioLogin } from "@/app/modelos";
 import { json } from "zod";
-
+import {createPlanoBasico} from "@/lib/stripe"
 interface UsuarioToken{
     id:string,
     nome:string,
@@ -30,7 +30,7 @@ export async function GET(request:NextRequest){
         if(info?.historias_geradas_no_mes===0||!info?.historias_geradas_no_mes){
            return NextResponse.json({ mesagem:"Você excedeu o número de histórias Geradas" },{status:404})
         }
-       return NextResponse.json({plano:info.plano,id:info.id},{status:200})
+       return NextResponse.json({plano:info.plano,id:info.id,nome:info.nome},{status:200})
     }
     return NextResponse.json({ usuario },{status:200})
     } catch (error) {
@@ -57,4 +57,24 @@ export async function PATCH(request:NextRequest){
     } catch (error) {
          return NextResponse.json({mensagem:"Erro no servidor"},{status:500})
       }
+}
+export async function POST(request:NextResponse){
+    try {
+        const plano:string=await request.json()
+      
+          const token = request.cookies.get("auth_token")?.value
+         
+        if (!token) {
+    return NextResponse.json({ mensagem: "Não autorizado" }, { status: 401 })
+  } 
+ 
+   const usuario:UsuarioToken =  await jwt.decode(token) as UsuarioToken
+
+       const sessao=await createPlanoBasico(usuario.id,usuario.email,plano)
+       if(sessao&&sessao.url){
+        return NextResponse.json({sessao},{status:200})
+       }
+    } catch (error) {
+        return NextResponse.json({mensagem:"Erro no servidor"},{status:500})
+    }
 }

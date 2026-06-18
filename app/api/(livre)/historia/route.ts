@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prima";
+import { prisma } from "@/lib/prisma";
 import { NextBuildContext } from "next/dist/build/build-context";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from 'next/headers'
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
         data: {
           texto: conteudo.texto,
           crianca_id: conteudo.crianca_id,
-          nota: 0,
+         
          
           ...(nomesImagens.length > 0 && {
             imagem: {

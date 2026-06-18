@@ -1,3 +1,4 @@
+'use client'
 
 import Image from "next/image"
 import { FaBookOpen, FaUsers } from "react-icons/fa";
@@ -8,28 +9,47 @@ import jwt  from "jsonwebtoken"
 import { Navegaçao } from "./componentes/Navegação";
 
 
-import { cookies } from "next/headers";
-import { HistoriaProvider } from "./componentes/HistoriaHook";
 
-interface UsuarioHome{
+import { HistoriaProvider } from "./componentes/HistoriaHook";
+import { useEffect, useState } from "react";
+
+interface UsuarioToken{
     id:string,
     nome:string,
+    email:string,
     plano:string,
-    foto:string|null
+    foto:string|null,
+    iat?: number; 
+    exp?: number;
+
 }
 
-export default async function Home({ children }: { children: React.ReactNode },
-  
-) {
+export default  function Home({ children }: { children: React.ReactNode },
    
+) {
+   const [usuario,setusuario]=useState<UsuarioToken>()
+
    
  
-    
-      const cookie=await cookies()
-        const token = cookie.get('auth_token')?.value
-       let usuario:UsuarioHome|null
-  
-    usuario = token ? jwt.decode(token) as UsuarioHome:null;
+    useEffect(()=>{
+          
+       const buscarusuario=async ()=>{
+          try{
+          const resposta=await fetch("http://localhost:3000/api/usuario/info",{
+          method:"GET"
+        })
+        if(resposta.status===200){
+          const token:UsuarioToken= await resposta.json()
+          setusuario(token)
+        }
+       
+      }catch(error){
+        console.log(error)
+      }
+    };
+       buscarusuario()
+    },[])
+      
     
   
 

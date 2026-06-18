@@ -1,5 +1,5 @@
 
-import { prisma } from "@/lib/prima";
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import {UsuarioLogin, UsuarioModelo} from "@/app/modelos"
