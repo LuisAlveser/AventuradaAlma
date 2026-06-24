@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         nome:validador.nome,
         email:validador.email,
         senha:senha,
-        historias_geradas_no_mes:5,
+        historias_geradas_no_mes:3,
         historias_salvas:3,                     
         stripe_customer_id:customer.id,
        

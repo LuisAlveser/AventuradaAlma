@@ -26,13 +26,13 @@ export function Planos({ setplanos }: Props) {
             <span className="text-blue-200/60">/sempre</span>
           </div>
           <ul className="flex-1 space-y-4 mb-8">
-            <Feature text="Até 3 histórias" />
+            <Feature text=" Gere até 3 histórias" />
             <Feature text="Salve até 2 histórias" />
              <Feature text=" Salve até 2 crianças" />
             <Feature text="Sem imagens" crossout />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 transition-colors">
-             Você já está nesse plano
+             Você já tem esse pacote
           </button>
         </div>
 
@@ -44,16 +44,17 @@ export function Planos({ setplanos }: Props) {
           <h2 className="text-xl font-medium text-blue-100">Básico</h2>
           <div className="my-6">
             <span className="text-5xl font-bold">R$ 29</span>
-            <span className="text-blue-100/60">,90/mês</span>
+            <span className="text-blue-100/60">,90/uni</span>
           </div>
           <ul className="flex-1 space-y-4 mb-8">
-            <Feature text="20 histórias por mês" />
+            <Feature text=" Gere 20 histórias" />
             <Feature text="Salve até 10 histórias" />
               <Feature text=" Salve até 10 crianças" />
             <Feature text="Imagens inclusas" />
+             <Feature text="Os benefícios dos pacotes não são acumulativos." />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors shadow-lg">
-          Criar Conta para Assinar
+          Crie Conta para Comprar
           </button>
         </div>
 
@@ -62,16 +63,17 @@ export function Planos({ setplanos }: Props) {
           <h2 className="text-xl font-medium text-blue-300">Pró</h2>
           <div className="my-6">
             <span className="text-5xl font-bold">R$ 59</span>
-            <span className="text-blue-200/60">,90/mês</span>
+            <span className="text-blue-200/60">,90/uni</span>
           </div>
           <ul className="flex-1 space-y-4 mb-8">
-            <Feature text="100 histórias por mês" />
+            <Feature text=" Gere 100 histórias " />
             <Feature text="Salve até 100 histórias" />
              <Feature text=" Salve até 50 crianças" />
             <Feature text="Imagens inclusas" />
+             <Feature text="Os benefícios dos pacotes não são acumulativos." />
           </ul>
           <button className=" cursor-pointer w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 transition-colors border border-blue-400">
-            Criar Conta para Assinar
+            Crie Conta para Comprar
           </button>
         </div>
 

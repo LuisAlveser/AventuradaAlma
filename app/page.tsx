@@ -4,15 +4,39 @@ import { Botao } from "@/app/componentes/Botao";
 import { CardsHome } from "./componentes/CardsHome";
 import { FaBookOpen, FaUserAlt,FaImage } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormularioUsuario } from "./componentes/FormularioCadastroUsuario";
 import { Login } from "./componentes/FormularioLoginUsuario";
 import { Planos } from "./componentes/Planos";
+import { email } from "zod";
+import { FormularioAlterarSenha } from "./componentes/FormularioAlterarSenha";
 
-export default function Home() {
+interface PageProps {
+  searchParams: Promise<{ email?: string }>;
+}
+
+export default function Home({searchParams}:PageProps) {
+
   const[login,setlogin]=useState<boolean>(false)
   const[cadastro,setcadastro]=useState<boolean>(false)
   const[planos,setplanos]=useState<boolean>(false)
+  const[alterarsenhaformulario,setalterarsenhaformuario]=useState<boolean>(false)
+  const[alterarsenhaEmail,setalterarsenhaEmail]=useState<string>("")
+  
+   useEffect(()=>{
+    const buscar_email=async ()=>{
+        const {email}= await searchParams
+       
+        if(email){
+          setalterarsenhaEmail(email)
+          setalterarsenhaformuario(true)
+        }else{
+          setalterarsenhaEmail("")
+        }
+    }
+     buscar_email()
+   },[])
+  
   return (
     <div className="w-full min-h-screen flex flex-col bg-blue-300">
      
@@ -35,7 +59,7 @@ export default function Home() {
 
           <div className="flex flex-row items-center gap-4 pt-2">
             <Botao FormOpen={()=>setcadastro(true)}>Experimente Grátis</Botao>
-            <Botao  FormOpen={()=>setplanos(true)}>Conheça nossos Planos</Botao>
+            <Botao  FormOpen={()=>setplanos(true)}>Conheça nossos Pacotes</Botao>
           </div>
         </div>
 
@@ -67,7 +91,12 @@ export default function Home() {
     />
          
         </div>
-      
+       {alterarsenhaformulario?
+       <FormularioAlterarSenha setalterarsenhaformuario={setalterarsenhaformuario}
+       alterarsenhaEmail={alterarsenhaEmail}
+       />
+       :null
+       }
       </main>
     </div>
   );

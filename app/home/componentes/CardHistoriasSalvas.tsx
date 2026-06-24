@@ -158,7 +158,7 @@ const excluir=async (id:string)=>{
 
                
           </div>
-        ))):(<h1 className="text-blue-600 justify-center items-center ">Nenhuma criança cadastrada</h1>)}
+        ))):(<h1 className="text-blue-600 justify-center items-center ">Nenhuma história cadastrada</h1>)}
         
           
         

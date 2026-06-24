@@ -12,22 +12,19 @@ import { Navegaçao } from "./componentes/Navegação";
 
 import { HistoriaProvider } from "./componentes/HistoriaHook";
 import { useEffect, useState } from "react";
+import { plano } from "@/generated/prisma/enums";
 
-interface UsuarioToken{
-    id:string,
-    nome:string,
-    email:string,
-    plano:string,
-    foto:string|null,
-    iat?: number; 
-    exp?: number;
-
+interface Info {
+    nome: string;
+    plano: plano;
+    historias_salvas: number | null;
+    historias_geradas_no_mes: number | null;
 }
 
 export default  function Home({ children }: { children: React.ReactNode },
    
 ) {
-   const [usuario,setusuario]=useState<UsuarioToken>()
+   const [usuario,setusuario]=useState<Info>()
 
    
  
@@ -39,7 +36,7 @@ export default  function Home({ children }: { children: React.ReactNode },
           method:"GET"
         })
         if(resposta.status===200){
-          const token:UsuarioToken= await resposta.json()
+          const token:Info= await resposta.json()
           setusuario(token)
         }
        
@@ -93,13 +90,16 @@ export default  function Home({ children }: { children: React.ReactNode },
       <main className="flex-1 p-8 bg-blue-50/30">
         <header className="mb-6  flex  flex-row justify-between ">
           <h1 className="text-2xl font-bold text-slate-800">Bem-vindo de volta!</h1>
-           <div className=" flex flex-row justify-center items-end gap-2">
+           <div className=" flex flex-row justify-center items-center gap-2">
              <FaUserCircle size={30} className="text-blue-500"/>
              <h1 className="text-blue-500">{usuario?.nome}</h1>
              <div className=" border-2 bg-blue-800 rounded-2xl px-2">
                <h2 className="text-white">{usuario?.plano}</h2>
              </div>
-             
+              <div className="flex justify-center items-center gap-2 bg-blue-800 rounded-2xl border-2 px-2">
+                 <FaBookOpen className="text-white"/>
+                <h1 className="text-white font-bold">{usuario?.historias_geradas_no_mes}</h1>
+              </div>
            </div>
            
         </header>

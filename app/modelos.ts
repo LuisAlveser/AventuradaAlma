@@ -53,3 +53,11 @@ export const UsuarioAtualizacao=z.object({
 export const HistoriaFormulario=z.object({
     conteudoHistoria:z.string().min(2,"Este campo deve ter mais caracteres")
 })
+export const UsuarioEnvioEmail=z.object({
+
+  email: z.string().email("Email incorreto"), 
+})
+
+export const UsuarioAtualizacaoSenha=z.object({
+     senha: z.string().min(5, "A senha deve ter mais dígitos"),
+})

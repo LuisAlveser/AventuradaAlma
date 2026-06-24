@@ -61,6 +61,19 @@ export function Configuracao(){
             setcarregando(false)
          }
    }
+   const excluir_conta=async ()=>{
+      try {
+             const resposta= await fetch(`http://localhost:3000/api/usuario/${usuario?.id}`,{
+        method:"DELETE"
+       })
+       if(resposta.status===200){
+        rota.push("/")
+       }
+      } catch (error) {
+        
+        toast.error("Erro ao excluir conta")
+      }
+   }
 useEffect(()=>{
     const buscarToken=async ()=>{
         try {
@@ -160,6 +173,7 @@ useEffect(()=>{
 
 <div className="flex flex-row justify-end w-full">
     <button 
+    onClick={excluir_conta}
         type="button" 
         className="flex items-center justify-center cursor-pointer text-white gap-2 bg-red-600 px-4 py-2 rounded-2xl hover:bg-red-700 font-medium transition-colors"
     >

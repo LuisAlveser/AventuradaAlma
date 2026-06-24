@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
 import { prisma } from "@/lib/prisma";
-import { email } from "zod";
+import { email, json } from "zod";
 import { serialize } from 'cookie'
 
 export function GET(request:NextRequest){

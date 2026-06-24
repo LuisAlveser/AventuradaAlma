@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe"; 
 import { prisma } from "@/lib/prisma";
-import { serialize } from 'cookie'
-import jwt  from "jsonwebtoken"
 
-
+///Garante que após o pagamento o plano do usuário mude e as benefícios
+//http://localhost:3000/api/stripe porta que escuta a transação 
 export async function POST(request: NextRequest) {
     
     try {
@@ -28,8 +27,9 @@ export async function POST(request: NextRequest) {
         const totalPago = session.amount_total;
 
         const plano:string=totalPago===2990?"BASICO":"PRO"
-        console.log("Informação Usuario",usuarioId,customerId,totalPago,plano)
+        
         const usuario= await prisma.usuario.findFirst({where:{stripe_customer_id:customerId}})
+       
         if(!usuario){
              return NextResponse.json({ mensagem:"Usuario não encontrado" }, { status: 404 });
         }
