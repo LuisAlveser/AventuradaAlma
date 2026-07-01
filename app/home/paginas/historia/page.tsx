@@ -1,7 +1,7 @@
 'use client'
 
 import { toast } from "sonner";
-import { useHistoria, } from "../../componentes/HistoriaHook";
+import { useHistoria,} from "../../componentes/HistoriaHook";
 import { GoogleGenAI } from "@google/genai";
 import { useEffect, useEffectEvent, useState } from "react";
 import {useRouter} from "next/navigation"
@@ -10,7 +10,15 @@ import Image from "next/image"
 interface resposta{
     plano:string,
     id:string,
+    nome:string,
+    historias_geradas_no_mes:number
 }
+interface RespostaIA{
+   mensagem: string;
+    texto: string;
+    
+}
+
 interface HistoriaInterface{
      texto: string;
     nota ?: number | null;
@@ -21,54 +29,94 @@ interface HistoriaInterface{
     plano:string,
     id:string
 }
-export default function Historia(){
+
+export default function Historia({params}:{params:Promise<{id:string}>}){
     const rota=useRouter()
-     const {dados} = useHistoria();
+     const {dados,buscarUsuario} = useHistoria();
      const [usuario,setUsuario]=useState<resposta>()
     const [texto,setTexto]=useState<string>("Gerando texto ...")
-    let [imagens, setImagens] = useState<string[]>([]);
+    let [imagens, setImagens] = useState<string[]|null>(null);
     const [carregando,setcarregando]=useState<boolean>(false)
-   
+     const [carregando_historia,setcarregando_historia]=useState<boolean>(true)
         if (!dados) return <p>Nenhum dado encontrado...</p>;
    
 
-useEffect(()=>{
-    
-    const gerar_texto=async ()=>{
-          try {
-             if (!dados) return;
-     
-     
-    const response_usuario =await fetch("http://localhost:3000/api/usuario/info",{
-        method:"GET"
-     })
-     if(response_usuario.status===200){
-        const  usuario:resposta = await response_usuario.json()
+useEffect(() => {
+    let isMounted = true;
 
-         setUsuario(usuario)
-           const response_texto =await fetch("http://localhost:3000/api/ia",{
-        method:"POST",
-        body:JSON.stringify(dados.crianca)
-     })
-     if(response_texto.status===200){
-        const texto = await response_texto.json()
-        setTexto(texto)
-     }
-     if(response_texto.status===400){
-        toast.error("Erro na geração do texto")
-     }
-   
-     }
-   
-  
-   } catch (error) {
-     console.log("Erro na geração da historia",error)
-      toast.error("Erro na geração do texto")
-       setTexto("Erro ao gerar história. Tente novamente.");
-  }
-    }
-    gerar_texto()
-   },[dados])
+    const gerar_texto = async () => {
+        try {
+            if (!dados) return;
+            
+            const response_usuario = await fetch("/api/usuario/info", { method: "GET" });
+            
+            if (response_usuario.status === 200 && isMounted) {
+                const usuario: resposta = await response_usuario.json();
+                setUsuario(usuario);
+
+               
+
+                if ( isMounted) {
+                    const iatexto=await fetch("http://localhost:3000/api/ia",{
+                     method:"POST",
+                      headers: {
+                      "Content-Type": "application/json"
+                                },
+                     body:JSON.stringify({crianca:dados.crianca,conteudo:dados.conteudo})  
+
+                    })
+                    if(iatexto.status===200){
+                       const {texto}: RespostaIA = await iatexto.json()
+                       setTexto(texto)
+                      
+                    await new Promise((resolve) => setTimeout(resolve, 100));
+
+                    
+                    await buscarUsuario();
+                     
+
+                        if(usuario.plano!=="FREE"){
+                        
+                        const resposta= await fetch("http://localhost:3000/api/ia/imagens",{
+                            
+                            method:"POST",
+                            headers: {
+                                    "Content-Type": "application/json"
+                                },
+                            body:JSON.stringify({texto:"Gatos"})
+                        })
+                        console.log("Resposta api",resposta)
+                        if(resposta.status===200){
+                            
+                            const  {imagens:imagens}= await  resposta.json()
+                            setImagens([imagens[0],imagens[1]])
+                        }
+                    }else{
+                        setImagens(null)
+                    }
+                    }   
+                    
+                }
+                
+                
+            }
+        } catch (error) {
+            if (isMounted) {
+                toast.error("Erro na geração do texto");
+                setTexto("Erro ao gerar história. Tente novamente.");
+            }
+        }finally{
+             
+            setcarregando_historia(false)
+        }
+    };
+
+    gerar_texto();
+
+    return () => {
+        isMounted = false; 
+    };
+}, []);
 
 
 
@@ -79,7 +127,9 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
              if (!usuario||!usuario.id) {
         toast.error("Aguarde o carregamento dos dados do usuário...");
         return;
-    }       
+    }    
+    const img1 = imagens && imagens[0] ? imagens[0] : "";
+        const img2 = imagens && imagens[1] ? imagens[1] : "";   
              
            
    
@@ -89,8 +139,8 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
                 criado_em:new Date(),
                 plano:usuario!.plano,
                 id:usuario!.id,
-                imagem1:imagens[0]||"",
-                imagem2:imagens[1]||""
+                imagem1:img1,
+                imagem2:img2
                 
             }
            
@@ -101,14 +151,15 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
             })
             if(resposta.status===200){
                 toast.success("História Salva com Sucesso")
-            return   rota.back()
+             rota.back()
+             return
             }
             if(resposta.status===403){
             return    toast.error("Você excedeu o número de histórias salvas, exclua uma para salvar ")
             }
             
          } catch (error) {
-            console.log(error)
+           console.error("Erro ao salvar história:", error)
              return    toast.error("Erro Inesperado no Servidor")
          }finally{
           return  setcarregando(false)
@@ -124,11 +175,13 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
         <div className="flex flex-col justify-start  mt-4  ">
            
             <div className="flex flex-col px-4 py-4 border-4  w-full max-h-80 overflow-y-auto  gap-4 items-center">
-                 {imagens.length>0?<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens[0]} alt="Imagem gerada por IA"/>:null}
+                 {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![0]} alt="Imagem gerada por IA"/>:null}
         
-          <h1 className="text-black">{texto}</h1>
+          <div className="text-black text-base whitespace-pre-line text-justify w-full px-2">
+    {texto}
+</div>
 
-         {imagens.length>0?<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens[1]} alt="Imagem gerada por IA"/>:null}
+         {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![1]} alt="Imagem gerada por IA"/>:null}
 
          </div>
          

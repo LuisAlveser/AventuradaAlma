@@ -12,6 +12,7 @@ interface UsuarioToken{
     email:string,
     plano:string,
     foto:string|null,
+    historias_geradas_no_mes:number,
     iat?: number; 
     exp?: number;
 
@@ -24,15 +25,18 @@ export async function GET(request:NextRequest){
     return NextResponse.json({ mensagem: "Não autorizado" }, { status: 401 })
   } 
  
-   const usuario:UsuarioToken =  await jwt.decode(token) as UsuarioToken
-   const info= await prisma.usuario.findFirst({where:{id:usuario.id}})
-    if(info){
-        if(info?.historias_geradas_no_mes===0||!info?.historias_geradas_no_mes){
-           return NextResponse.json({ mesagem:"Você excedeu o número de histórias Geradas" },{status:404})
-        }
-       return NextResponse.json({plano:info.plano,id:info.id,nome:info.nome,historias_geradas_no_mes:info.historias_geradas_no_mes},{status:200})
-    }
-    return NextResponse.json({ usuario },{status:200})
+   const {id}:UsuarioToken =  await jwt.decode(token) as UsuarioToken
+   const usuario =await prisma.usuario.findFirst({where:{id:id}})
+   
+    return NextResponse.json({
+        plano:usuario!.plano,
+        id:usuario!.id,
+        nome:usuario!.nome,
+        historias_geradas_no_mes:usuario!.historias_geradas_no_mes
+
+    },{status:200})
+    
+   
     } catch (error) {
         return NextResponse.json({mensagem:"Erro no servidor"},{status:500})
     }

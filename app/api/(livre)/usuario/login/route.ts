@@ -17,7 +17,7 @@ export async function POST(request:NextRequest) {
        
         const validador=UsuarioLogin.parse(usuariologin)
 
-        const {email,senha}=usuariologin
+        const {email,senha}=validador
 
         const usuario=await prisma.usuario.findFirst({where:{email:email}})
          if(!usuario){
@@ -32,7 +32,8 @@ export async function POST(request:NextRequest) {
           nome:usuario.nome,
           foto:usuario.foto_perfil,
           email:usuario.email,
-          plano:usuario.plano
+          plano:usuario.plano,
+          historias_geradas_no_mes:usuario.historias_geradas_no_mes
         
         }
         const token=jwt.sign(tokenpayload,process.env.SEGREDO!,{expiresIn:"1h"})

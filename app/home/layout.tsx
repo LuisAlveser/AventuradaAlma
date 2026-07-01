@@ -5,50 +5,39 @@ import { FaBookOpen, FaUsers } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 import { IoMdSettings } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
-import jwt  from "jsonwebtoken"
+
 import { Navegaçao } from "./componentes/Navegação";
 
 
 
-import { HistoriaProvider } from "./componentes/HistoriaHook";
+import { HistoriaProvider,useHistoria } from "./componentes/HistoriaHook";
 import { useEffect, useState } from "react";
 import { plano } from "@/generated/prisma/enums";
 
-interface Info {
-    nome: string;
-    plano: plano;
-    historias_salvas: number | null;
-    historias_geradas_no_mes: number | null;
+interface UsuarioToken{
+    id:string,
+    nome:string,
+    email:string,
+    plano:string,
+    foto:string|null,
+    historias_geradas_no_mes:number,
+    iat?: number; 
+    exp?: number;
+
 }
 
-export default  function Home({ children }: { children: React.ReactNode },
+export  function LayoutPainel({ children }: { children: React.ReactNode }
    
 ) {
-   const [usuario,setusuario]=useState<Info>()
-
-   
- 
+  const {usuario,buscarUsuario}=useHistoria()
     useEffect(()=>{
-          
-       const buscarusuario=async ()=>{
-          try{
-          const resposta=await fetch("http://localhost:3000/api/usuario/info",{
-          method:"GET"
-        })
-        if(resposta.status===200){
-          const token:Info= await resposta.json()
-          setusuario(token)
-        }
-       
-      }catch(error){
-        console.log(error)
+      const atualizar_info=async ()=>{
+        await buscarUsuario()
       }
-    };
-       buscarusuario()
+      atualizar_info()
     },[])
-      
-    
   
+    
 
   return (
 
@@ -107,11 +96,24 @@ export default  function Home({ children }: { children: React.ReactNode },
        
         <div className="border-2  border-dashed border-slate-200 rounded-2xl h-[calc(100vh-160px)] flex justify-center text-slate-400">
         
-           <HistoriaProvider>{children}</HistoriaProvider>
+          
+         
+                {children}
+          
+       
         
         </div>
       </main>
 
     </div>
   )
+}
+export default function Home({ children }: { children: React.ReactNode }) {
+    return (
+        <HistoriaProvider>
+            <LayoutPainel>
+                {children}
+            </LayoutPainel>
+        </HistoriaProvider>
+    );
 }

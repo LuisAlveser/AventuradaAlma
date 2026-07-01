@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Aventura da Alma",
   description: "Crie aventuras únicas para seu filho com  auxílio da inteligência artificial ",
- 
+  icons:"/Logo_Tcc.png"
 };
 
 export default function RootLayout({

@@ -45,3 +45,26 @@ export async function DELETE(request:NextRequest,{params}:{params:Promise<{id:st
          }
       } 
 }
+export async function GET(request:NextRequest,{params}:{params:Promise<{id:string}>}){
+      try {
+           
+    const {id}= await params
+   
+    const historia=await prisma.historia.findFirst({where:{id:id},include:{imagem:true}})
+    
+    if(!historia){
+      
+        return NextResponse.json({mensagem:"Id não encontrado"},{status:404})
+    }            
+       
+        return NextResponse.json({historia:historia},{status:200})
+       
+
+      
+ } catch (error) {
+  
+         if(error instanceof Error){
+            return NextResponse.json({mensagem:"Erro no servidor",error},{status:500})
+         }
+      } 
+}

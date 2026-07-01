@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import { prisma } from "@/lib/prisma";
 import { email, json } from "zod";
 import { serialize } from 'cookie'
+import { enviar_email } from "@/lib/nodemailer";
 
 export function GET(request:NextRequest){
     try {
@@ -24,6 +25,7 @@ interface UsuarioToken{
     nome:string,
     email:string,
     plano:string,
+    historias_geradas_no_mes:number
     foto:string|null,
     iat?: number; 
     exp?: number;
@@ -46,7 +48,8 @@ export async function PATCH(request:NextRequest){
             nome:usuario_atualizado.nome,
             email:usuario_atualizado.email,
             foto_perfil:usuario_atualizado.foto_perfil,
-            plano:usuario_atualizado.plano
+            plano:usuario_atualizado.plano,
+             historias_geradas_no_mes :usuario.historias_geradas_no_mes  
         }
         const token =jwt.sign(tokenpayload,process.env.SEGREDO!,{expiresIn:"1h"})
          const cookie = serialize('auth_token', token, {

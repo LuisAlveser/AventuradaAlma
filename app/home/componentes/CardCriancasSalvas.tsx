@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Carregando from "@/app/Carregando";
 import { toast } from "sonner";
 import { Formulariohistoria } from "./FormularioHistoria";
+import { useHistoria } from "./HistoriaHook";
 
 interface crianca{
       id: string;
@@ -43,6 +44,7 @@ export function CardCriancasSalvas(){
     const [paginaNav,setpaginaNav]=useState<number>(1)
     const [carregando,setcarregando]=useState<boolean>(false)
     const rota=useRouter()
+     const {buscarUsuario} = useHistoria();
     const [formulariohistoria,setformulariohistoria]=useState<boolean>(false)
 
 useEffect(()=>{
@@ -55,7 +57,7 @@ useEffect(()=>{
      })
        if(resposta.status===200){
         const dados:dados=await resposta.json()
-         
+         await buscarUsuario()
         setpaginacao(dados.paginacao)
         setCrianca(dados.crianca)
        

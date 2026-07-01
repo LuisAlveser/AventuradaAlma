@@ -94,7 +94,7 @@ export function Formulariohistoria({setformulariohistoria,crianca}:Props){
                    <div className="text-center mb-2">
                            <h2 className="text-gray-800 text-2xl font-bold trac
                            king-tight">Comece sua Aventura Agora</h2>
-                           <p className="text-gray-500 text-sm mt-1">Digite quais assuntos você gostaria que a história abordasse. Quanto mais detalhes você forneser  </p>
+                           <p className="text-gray-500 text-sm mt-1">Digite quais assuntos você gostaria que a história abordasse. Quanto mais detalhes você fornecer melhor será a história  </p>
                          </div>
                  
                         

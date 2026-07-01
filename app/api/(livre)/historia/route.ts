@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
 import { supabase } from "../crianca/route";
-
+import { serialize } from 'cookie'
 interface HistoriaInterface{
      texto: string;
     nota ?: number | null;
@@ -53,10 +53,12 @@ export async function POST(request: NextRequest) {
         },
         include: { imagem: true } 
       });
+  
+             return  NextResponse.json({novaHistoria,status:200})
 
-      return novaHistoria;
+     
     });
-
+       
     return NextResponse.json(resultado, { status: 200 });
 
   } catch (error) {

@@ -98,6 +98,9 @@ const excluir=async (id:string)=>{
         toast.error("Erro inesperado no servidor")
     }
 }
+const ler_nevamente =(id:string)=>{
+    rota.push(`http://localhost:3000/home/paginas/historia/${id}`)
+}
     return(
               <div className="flex flex-col justify-center items-center">
          <div className=" max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
@@ -149,7 +152,7 @@ const excluir=async (id:string)=>{
               
             </div>
              <button
-            
+              onClick={()=>{ler_nevamente(item.id)}}
                type="submit"
               className=" mt-4 cursor-pointer w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition-all text-xs tracking-wide shadow-md"
              >
