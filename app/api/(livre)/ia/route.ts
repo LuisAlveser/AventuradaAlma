@@ -75,13 +75,13 @@ ${
  const ai = new GoogleGenAI({ apiKey: process.env.CHAVE_APIGOOGLE });   
        switch(crianca.nivel_autismo){
         case "NIVEL_1":
-        maxTokens = 4500;
+        maxTokens = 5500;
         break;
     case "NIVEL_2":
-        maxTokens = 3500;
+        maxTokens = 4500;
         break;
     default:
-        maxTokens = 2500;  
+        maxTokens = 3500;  
        }
        
      const resposta= await ai.models.generateContent({

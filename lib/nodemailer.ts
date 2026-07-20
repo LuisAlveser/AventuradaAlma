@@ -1,6 +1,6 @@
 
 import nodemailer from "nodemailer";
-import rabbitmq from "amqplib"
+
 
 
 const trasport =nodemailer.createTransport({

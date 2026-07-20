@@ -37,6 +37,7 @@ export default function Historia({params}:{params:Promise<{id:string}>}){
     const [texto_historia,setTexto]=useState<string|null>(null)
     let [imagens, setImagens] = useState<string[]|null>(null);
     const [carregando,setcarregando]=useState<boolean>(false)
+    const [carregando_imagens,setcarregando_imagens]=useState<boolean>(false)
      const [carregando_historia,setcarregando_historia]=useState<boolean>(true)
         if (!dados) return <p>Nenhum dado encontrado...</p>;
    
@@ -76,7 +77,7 @@ useEffect(() => {
                      
 
                         if(usuario.plano!=="FREE"&&resultadoIA.texto){
-                        
+                        setcarregando_imagens(true)
                         const resposta= await fetch("http://localhost:3000/api/ia/imagens",{
                            
                             method:"POST",
@@ -87,7 +88,7 @@ useEffect(() => {
                         })
                         console.log("Resposta api",resposta)
                         if(resposta.status===200){
-                            
+                             setcarregando_imagens(false)
                             const  {imagens:imagens}= await  resposta.json()
                             setImagens([imagens[0],imagens[1]])
                         }
@@ -177,13 +178,13 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
            (
             <>
            <div className="flex flex-col px-4 py-4 border-4  w-full max-h-80 overflow-y-auto  gap-4 items-center">
-                 {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl "  width={550}  height={300} unoptimized src={imagens![0] } alt="Imagem gerada por IA"/>:null}
+                 {imagens&&imagens[0]?carregando_imagens?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl "  width={550}  height={300} unoptimized src={imagens![0] } alt="Imagem gerada por IA"/>:null}
         
           <div className="text-black text-base whitespace-pre-line text-justify w-full px-2">
     {texto_historia}
 </div>
 
-         {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![1] }unoptimized alt="Imagem gerada por IA"/>:null}
+         {imagens&&imagens[0]?carregando_imagens?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![1] }unoptimized alt="Imagem gerada por IA"/>:null}
 
          </div>
          
