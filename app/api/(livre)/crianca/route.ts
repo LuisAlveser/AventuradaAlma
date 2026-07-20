@@ -92,7 +92,7 @@ export async function POST(request:NextRequest){
       }
      }})
           return NextResponse.json({ 
-      message: "Cadastro realizado com sucesso!",
+      mensagem: "Cadastro realizado com sucesso!",
     }, { status: 200 })
 
     }
@@ -116,7 +116,7 @@ export async function POST(request:NextRequest){
       }
      }})
         return NextResponse.json({ 
-      message: "Cadastro realizado com sucesso!",
+      mensagem: "Cadastro realizado com sucesso!",
       
     }, { status: 200 })
 
@@ -125,6 +125,7 @@ export async function POST(request:NextRequest){
     
    
     if (error as any) {
+      console.error("ERRO :", error);
            if(error instanceof ZodError){
              return NextResponse.json({ error: "Erro no formulário" }, { status: 400 })
            }
@@ -164,6 +165,7 @@ export async function GET(request:NextRequest){
         return   NextResponse.json({ mensagem:"Nenhuma criança cadastrada" }, { status: 404 })
 
     } catch (error) {
+        console.log("Error",error)
          return NextResponse.json({ error: "Erro no servidor" }, { status: 500 })
     }
 }
