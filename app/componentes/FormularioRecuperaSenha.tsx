@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { TbPassword } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io"; // Ícone de fechar mais moderno
 import { useForm } from "react-hook-form";
-import { UsuarioAtualizacaoSenha} from "../modelos"
+import { UsuarioEnvioEmail} from "../modelos"
 import z from"zod"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from "sonner"
@@ -18,7 +18,7 @@ interface Props {
   setRecuperarSenha: Dispatch<SetStateAction<boolean>>;
 }
 
-type UsuarioAtualizarSenha =z.infer<typeof UsuarioAtualizacaoSenha>
+type UsuarioAtualizarSenha =z.infer<typeof UsuarioEnvioEmail>
 
 export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
   
@@ -28,7 +28,7 @@ export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
    
 
     const {register,handleSubmit,formState:{errors}}=useForm<UsuarioAtualizarSenha>({
-        resolver:zodResolver( UsuarioAtualizacaoSenha)
+        resolver:zodResolver( UsuarioEnvioEmail)
     })
      
 
@@ -40,7 +40,7 @@ export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
         setcarregando(true)
          const resposta=await fetch("http://localhost:3000/api/usuario/enviar_email",{
             method:"POST",
-            body:JSON.stringify({senha:data.senha})
+            body:JSON.stringify({email:data.email})
 
          })
          if(resposta.status===200){
@@ -78,32 +78,26 @@ export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
        
   
               <div className="text-center mb-2">
-          <h2 className="text-gray-800 text-2xl font-bold tracking-tight">Altere sua Senha</h2>
+          <h2 className="text-gray-800 text-2xl font-bold tracking-tight">Altere sua Senha </h2>
            <p className="text-gray-500 text-sm mt-1">Você receberá o email de confirmação, fique atento a sua caixa de spam</p>
         </div>
             <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700 pl-1">Senha</label>
+          
+          <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium text-gray-700 pl-1">E-mail</label>
           <div className="relative flex items-center">
-            <TbPassword className="absolute left-3.5 text-gray-400 pointer-events-none" size={20} />
-            
+            <MdEmail className="absolute left-3.5 text-gray-400 pointer-events-none" size={20} />
             <input 
-              {...register("senha")}
-              type={mostrasenha?"password":"text"} 
-              placeholder="Digite sua senha" 
+            {...register("email")}
+              type="email" 
+              placeholder="seu@email.com" 
               className="w-full bg-slate-50 text-gray-800 placeholder:text-gray-400 rounded-xl pl-11 pr-4 py-3 outline-none border border-slate-200 focus:border-blue-400 focus:bg-white transition-all text-sm"
               required
             />
-           
-             <button
-               type="button"
-               onClick={() => setmostraSenha(!mostrasenha)}
-               className="absolute right-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer focus:outline-none"
-                >
-              {mostrasenha ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-             </button>
-
           </div>
-           {errors.senha&&(<span className="text-red-500">{errors.senha.message}</span>)}
+          {errors.email&&(<span className="text-red-500">{errors.email.message}</span>)}
+        </div>
+          
         </div>
     
 

@@ -3,7 +3,7 @@ import { GoogleGenAI } from '@google/genai';
 import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
-const fs = await import("fs");
+
 
 
 export async function  POST(request:NextRequest){
@@ -12,29 +12,39 @@ export async function  POST(request:NextRequest){
   const {texto}=await request.json()      
  const ai = new GoogleGenAI({ apiKey: process.env.CHAVE_APIGOOGLE });  
 
-   console.log("Texto para Imagens",texto)
+   console.log("História para o prompt das imagens",texto)
 const [imagem1,imagem2]= await Promise.all([
-      await ai.interactions.create({
-  model: 'gemini-3.1-flash-image',
+       ai.interactions.create({
+  model: 'gemini-3.1-flash-lite-image',
    input : `Com base nesse texto gere uma ilustração infantil estilo livro de histórias sobre o início deste conto: ${texto}`,
- 
+   response_format:{
+     type: "image",
+  }
   
 }),
-await  ai.interactions.create({
-  model: 'gemini-3.1-flash-image',
+     ai.interactions.create({
+  model: 'gemini-3.1-flash-lite-image',
   input: `Com base nesse texto gere  uma ilustração infantil estilo livro de histórias sobre o final deste conto: ${texto}`,
-   
+  response_format:{
+     type: "image",
+  }
 })
 ]) 
-if(imagem1.output_image?.uri&&imagem2.output_image?.uri){
-   
+if(!imagem1.output_image?.data || !imagem2.output_image?.data){
+  return NextResponse.json({mensagem:"Error inesperado"},{status:500})
     
-        const imagensArray:string[]=[imagem1.output_image.uri,imagem2.output_image.uri]
-            console.log("Imagens:",imagensArray)
- return  NextResponse.json({imagens:imagensArray},{status:200})
+    
 }
- return NextResponse.json({mensagem:"Error inesperado"},{status:500})
+ const base64Image1 = imagem1.output_image?.data;
+    const base64Image2 = imagem2.output_image?.data;
 
+
+   const imagensArray:string[]=[
+    `data:image/png;base64,${base64Image1}`,
+    `data:image/png;base64,${base64Image2}`]
+          
+ return  NextResponse.json({imagens:imagensArray},{status:200})
+ 
 
  } catch (error) {
    

@@ -1,5 +1,7 @@
 
 import nodemailer from "nodemailer";
+import rabbitmq from "amqplib"
+
 
 const trasport =nodemailer.createTransport({
     host:"smtp.gmail.com",
@@ -10,9 +12,11 @@ const trasport =nodemailer.createTransport({
         pass:process.env.SENHA
     }
 })
+
 const usuario=process.env.EMAIL
 
-export function enviar_email(email:string){
+export async function enviar_email(email:string){
+  
    trasport.sendMail({
     from:`Aventura da Alma<${usuario}>`,
     subject:"Aventura da Alma ",

@@ -54,12 +54,12 @@ export async function POST(request: NextRequest) {
         include: { imagem: true } 
       });
   
-             return  NextResponse.json({novaHistoria,status:200})
+             return  NextResponse.json({novaHistoria},{status:200})
 
      
     });
        
-    return NextResponse.json(resultado, { status: 200 });
+    return NextResponse.json({resultado}, { status: 200 });
 
   } catch (error) {
     console.error("Erro na API:", error);
@@ -106,25 +106,29 @@ export async function GET(request:NextRequest){
 }
 }
 const salvar_Imagens = async (imagem1: string, imagem2: string): Promise<string[]> => {
-    const urls: string[] = [imagem1, imagem2];
+    const imagensBase64: string[] = [imagem1, imagem2];
     let retorno: string[] = [];
 
-    if (imagem1 && imagem2) {
-        for (const url of urls) {
+    
+        for (const base64Str of imagensBase64) {
             try {
                
-                const resposta = await fetch(url);
-                const blob = await resposta.blob();
+                
 
               
-                const extensao = url.split('.').pop()?.split(/\#|\?/)[0] || 'jpg';
+                const regexMime = base64Str.match(/^data:(image\/\w+);base64,/);
+                const contentType = regexMime ? regexMime[1] : 'image/png';
+                 const extensao = contentType.split('/')[1] || 'png';
+
+                 const dadosPurosBase64 = base64Str.replace(/^data:image\/\w+;base64,/, "");
+                 const buffer = Buffer.from(dadosPurosBase64, 'base64');
                 const nomeArquivo = `${Date.now()}-${Math.random().toString(36).substring(2, 7)}.${extensao}`;
 
           
                 const { data, error: storageError } = await supabase
                     .storage
                     .from('fotos_perfil')
-                    .upload(nomeArquivo, blob, { 
+                    .upload(nomeArquivo,buffer, { 
                         contentType: `image/${extensao}`,
                         upsert: false
                     });
@@ -139,8 +143,8 @@ const salvar_Imagens = async (imagem1: string, imagem2: string): Promise<string[
                 console.error("Erro ao baixar ou enviar imagem:", err);
             }
         }
-        return retorno;
-    }
+        
+    
     return retorno;
 };
 

@@ -34,7 +34,7 @@ export default function Historia({params}:{params:Promise<{id:string}>}){
     const rota=useRouter()
      const {dados,buscarUsuario} = useHistoria();
      const [usuario,setUsuario]=useState<resposta>()
-    const [texto,setTexto]=useState<string>("Gerando texto ...")
+    const [texto_historia,setTexto]=useState<string|null>(null)
     let [imagens, setImagens] = useState<string[]|null>(null);
     const [carregando,setcarregando]=useState<boolean>(false)
      const [carregando_historia,setcarregando_historia]=useState<boolean>(true)
@@ -65,9 +65,9 @@ useEffect(() => {
                      body:JSON.stringify({crianca:dados.crianca,conteudo:dados.conteudo})  
 
                     })
-                    if(iatexto.status===200){
-                       const {texto}: RespostaIA = await iatexto.json()
-                       setTexto(texto)
+                    if(iatexto.status===200 && isMounted){
+                       const resultadoIA: RespostaIA = await iatexto.json()
+                       setTexto(resultadoIA.texto)
                       
                     await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -75,15 +75,15 @@ useEffect(() => {
                     await buscarUsuario();
                      
 
-                        if(usuario.plano!=="FREE"){
+                        if(usuario.plano!=="FREE"&&resultadoIA.texto){
                         
                         const resposta= await fetch("http://localhost:3000/api/ia/imagens",{
-                            
+                           
                             method:"POST",
                             headers: {
                                     "Content-Type": "application/json"
                                 },
-                            body:JSON.stringify({texto:"Gatos"})
+                            body:JSON.stringify({texto:resultadoIA.texto})
                         })
                         console.log("Resposta api",resposta)
                         if(resposta.status===200){
@@ -173,25 +173,31 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
     
     return(
         <div className="flex flex-col justify-start  mt-4  ">
-           
-            <div className="flex flex-col px-4 py-4 border-4  w-full max-h-80 overflow-y-auto  gap-4 items-center">
-                 {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![0]} alt="Imagem gerada por IA"/>:null}
+           {texto_historia===null?<Carregando/>:
+           (
+            <>
+           <div className="flex flex-col px-4 py-4 border-4  w-full max-h-80 overflow-y-auto  gap-4 items-center">
+                 {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl "  width={550}  height={300} unoptimized src={imagens![0] } alt="Imagem gerada por IA"/>:null}
         
           <div className="text-black text-base whitespace-pre-line text-justify w-full px-2">
-    {texto}
+    {texto_historia}
 </div>
 
-         {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![1]} alt="Imagem gerada por IA"/>:null}
+         {imagens&&imagens[0]?carregando_historia?<Carregando/>:<Image className="flex justify-center items-center rounded-2xl"  width={550}  height={300} src={imagens![1] }unoptimized alt="Imagem gerada por IA"/>:null}
 
          </div>
          
           <button
-              onClick={()=>{salva_historia(texto,dados.crianca.id)}}
+              onClick={()=>{salva_historia(texto_historia!,dados.crianca.id)}}
                type="submit"
               className=" mt-4 cursor-pointer w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition-all text-xs tracking-wide shadow-md"
              >
                  {carregando?<Carregando/>:"Salvar Conto"}
                 </button>
+                </>
+                )
+           }
+            
         </div>
     )
 }

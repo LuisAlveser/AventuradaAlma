@@ -50,8 +50,6 @@ export async function POST(request:NextRequest){
 
     const {conteudo,crianca}:HistoriaConteudo =  await request.json()
 
-     console.log("Criança",crianca,conteudo)
-     console.log("Conteudo",conteudo)
 
       let maxTokens:number
    const prompt= `Crie uma história para uma criança de nome ${crianca.nome}, com idade de ${crianca.idade} anos e autismo de nível ${crianca.nivel_autismo}. Essa criança possui o seguinte nível de alfabetização: ${crianca.nivel_alfabetizacao}, e tem como hiperfoco: ${crianca.hiperfoco}. A história deve dar ênfase nessas preferências: ${conteudo}.
@@ -77,25 +75,23 @@ ${
  const ai = new GoogleGenAI({ apiKey: process.env.CHAVE_APIGOOGLE });   
        switch(crianca.nivel_autismo){
         case "NIVEL_1":
-            maxTokens=3500
-            break;
-       
-        case "NIVEL_2":
-            maxTokens=2500
-            break;
-
-         default:
-            maxTokens=1500   
+        maxTokens = 4500;
+        break;
+    case "NIVEL_2":
+        maxTokens = 3500;
+        break;
+    default:
+        maxTokens = 2500;  
        }
        
-    /// const resposta= await ai.models.generateContent({
-     //   model: "gemini-2.5-flash",
-    // contents: prompt,
-    //config:{
+     const resposta= await ai.models.generateContent({
+       model: "gemini-2.5-flash",
+     contents: prompt,
+    config:{
        maxOutputTokens:maxTokens    
-  //  } 
-//})
-   const textoGerado ="Gata"/// resposta.text;
+   } 
+})
+   const textoGerado = resposta.text;
    
     if(textoGerado){
        
@@ -141,7 +137,7 @@ ${
     }
     
     } catch (error) {
-        console.log(error)
+        console.log("Erro na geração do texto ",error)
         return NextResponse.json({mensagem:"Erro no servidor"},{status:500})
     }
 }
