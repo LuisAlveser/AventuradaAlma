@@ -1,10 +1,11 @@
 import { url } from "inspector"
 import Stripe from "stripe"
 
-export const  stripe=new Stripe(process.env.CHAVE_STRIPE_SECRETA as string,{
-    httpClient:Stripe.createFetchHttpClient()
-})
+export const  stripekey= process.env.CHAVE_STRIPE_SECRETA || "sk_test_placeholder_key_for_build"
 
+export const stripe = new Stripe(stripekey, {
+  httpClient: Stripe.createFetchHttpClient()
+})
 export const getStripeCustomer=async(email:string)=>{
  const customer= await stripe.customers.list({email})
  return customer.data[0]
