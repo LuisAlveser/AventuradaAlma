@@ -52,7 +52,7 @@ export function Formulariohistoria({setformulariohistoria,crianca}:Props){
   const ir_para_historia=async (data:HistoriaConteudo)=>{
              try {
                 setcarregando(true)
-                const resposta =await fetch(`http://localhost:3000/api/usuario/historiasgeradas`,{
+                const resposta =await fetch(`/api/usuario/historiasgeradas`,{
         method:"GET"
      })
              if(resposta.status===200){
@@ -60,7 +60,7 @@ export function Formulariohistoria({setformulariohistoria,crianca}:Props){
                 crianca,
                 conteudo:data.conteudoHistoria
               })
-           return  rota.push(`/home/paginas/historia`,)
+           return  rota.push(`/home/paginas/historia`)
              }
              if(resposta.status==404){
               
