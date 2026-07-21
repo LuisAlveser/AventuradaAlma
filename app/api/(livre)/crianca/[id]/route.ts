@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma'
 import { CriancaCadastro } from "@/app/modelos";
-import { supabase } from "../route";
+import { supabase} from "@/lib/supabase";
 import { alfabetizacao, autismo } from "@/generated/prisma/enums";
 import { ZodError } from "zod";
 

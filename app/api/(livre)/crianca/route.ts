@@ -7,11 +7,7 @@ import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
 import { ZodError } from 'zod'
-
-const supabaseUrl = process.env.PROJETOURL!
-const supabaseKey = process.env.APIKEY!
-
-export const supabase = createClient(supabaseUrl, supabaseKey)
+import {supabase} from "@/lib/supabase"
 
 export async function POST(request:NextRequest){
       try {

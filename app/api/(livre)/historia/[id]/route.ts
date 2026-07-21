@@ -1,7 +1,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "../../crianca/route";
+import { supabase } from "@/lib/supabase";
 interface Imagem{
     id: string;
     conteudo: string;

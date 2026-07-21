@@ -3,7 +3,7 @@ import { NextBuildContext } from "next/dist/build/build-context";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from 'next/headers'
 import jwt from "jsonwebtoken"
-import { supabase } from "../crianca/route";
+import { supabase } from "@/lib/supabase";
 import { serialize } from 'cookie'
 interface HistoriaInterface{
      texto: string;
