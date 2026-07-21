@@ -27,8 +27,12 @@ export const createPlanoBasico=async(usuario_id:string,email:string,plano:string
             mode:"payment",
             client_reference_id:usuario_id,
             customer:customer.id,
-           success_url: "http://localhost:3000/home?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url: "http://localhost:3000/home",
+           success_url: "https://aventuradaalma.vercel.app/home?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url: "https://aventuradaalma.vercel.app/home",
+            tax_id_collection:{
+                enabled:true
+            },
+            billing_address_collection:"required",
             line_items:[
                 {
                    quantity:1,

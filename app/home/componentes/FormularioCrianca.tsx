@@ -38,7 +38,7 @@ export function FormularioCrianca() {
         formData.append("foto_perfil", data.foto_perfil[0]); 
     }
         setCarregando(true)
-      const resposta=await fetch("http://localhost:3000/api/crianca",{
+      const resposta=await fetch("/api/crianca",{
         method:"POST",
         body:formData
       })

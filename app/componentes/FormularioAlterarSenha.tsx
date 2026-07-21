@@ -36,7 +36,7 @@ export function FormularioAlterarSenha({ setalterarsenhaformuario ,alterarsenhaE
 
     try {
             setcarregando(true)
-            const response =await fetch("http://localhost:3000/api/usuario/info",{
+            const response =await fetch("/api/usuario/info",{
                headers: {
                 'Content-Type': 'application/json',
                },

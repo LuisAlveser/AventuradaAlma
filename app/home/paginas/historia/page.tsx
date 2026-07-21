@@ -58,7 +58,7 @@ useEffect(() => {
                
 
                 if ( isMounted) {
-                    const iatexto=await fetch("http://localhost:3000/api/ia",{
+                    const iatexto=await fetch("/api/ia",{
                      method:"POST",
                       headers: {
                       "Content-Type": "application/json"
@@ -78,7 +78,7 @@ useEffect(() => {
 
                         if(usuario.plano!=="FREE"&&resultadoIA.texto){
                         setcarregando_imagens(true)
-                        const resposta= await fetch("http://localhost:3000/api/ia/imagens",{
+                        const resposta= await fetch("/api/ia/imagens",{
                            
                             method:"POST",
                             headers: {
@@ -146,7 +146,7 @@ const salva_historia=async (texto:string,id_crianca:string)=>{
             }
            
 
-            const resposta=await fetch("http://localhost:3000/api/historia",{
+            const resposta=await fetch("/api/historia",{
                 method:"POST",
                 body:JSON.stringify(conteudo)
             })

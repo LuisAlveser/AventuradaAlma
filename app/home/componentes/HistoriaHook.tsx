@@ -46,7 +46,7 @@ export function HistoriaProvider({ children }: { children: ReactNode }) {
 
   const buscarUsuario = async () => {
         try {
-            const resposta = await fetch("http://localhost:3000/api/usuario/info", {
+            const resposta = await fetch("/api/usuario/info", {
                 method: "GET"
             });
             if (resposta.status === 200) {

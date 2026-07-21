@@ -38,7 +38,7 @@ export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
   const enviar_email=async (data:UsuarioAtualizarSenha)=>{
        try {
         setcarregando(true)
-         const resposta=await fetch("http://localhost:3000/api/usuario/enviar_email",{
+         const resposta=await fetch("/api/usuario/enviar_email",{
             method:"POST",
             body:JSON.stringify({email:data.email})
 

@@ -68,7 +68,7 @@ export async function PATCH(request:NextRequest){
          return NextResponse.json({mensagem:"Erro no servidor"},{status:500})
       }
 }
-export async function POST(request:NextResponse){
+export async function POST(request:NextRequest){
     try {
         const plano:string=await request.json()
       
@@ -79,7 +79,7 @@ export async function POST(request:NextResponse){
   } 
  
    const usuario:UsuarioToken =  await jwt.decode(token) as UsuarioToken
-
+    
        const sessao=await createPlanoBasico(usuario.id,usuario.email,plano)
       
 
@@ -87,6 +87,10 @@ export async function POST(request:NextResponse){
          
         return NextResponse.json({sessao},{status:200})
        }
+       return NextResponse.json(
+      { mensagem: "Não foi possível criar a sessão do checkout" }, 
+      { status: 400 }
+    );
     } catch (error) {
         console.log("Erro na compra",error)
         return NextResponse.json({mensagem:"Erro no servidor"},{status:500})

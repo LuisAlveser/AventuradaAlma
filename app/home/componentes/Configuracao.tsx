@@ -40,7 +40,7 @@ export function Configuracao(){
                 nome:data.nome,
                 email:data.email
             }
-            const resposta= await fetch("http://localhost:3000/api/usuario",{
+            const resposta= await fetch("/api/usuario",{
                 method:"PATCH",
                 body:JSON.stringify(dados),
                  headers: {
@@ -63,7 +63,7 @@ export function Configuracao(){
    }
    const excluir_conta=async ()=>{
       try {
-             const resposta= await fetch(`http://localhost:3000/api/usuario/${usuario?.id}`,{
+             const resposta= await fetch(`/api/usuario/${usuario?.id}`,{
         method:"DELETE"
        })
        if(resposta.status===200){
@@ -77,7 +77,7 @@ export function Configuracao(){
 useEffect(()=>{
     const buscarToken=async ()=>{
         try {
-          const  resposta= await fetch("http://localhost:3000/api/usuario",{
+          const  resposta= await fetch("/api/usuario",{
             method:"GET"
           })
           if(resposta.status===200){
@@ -93,7 +93,7 @@ useEffect(()=>{
     
 },[])
     const sair=async ()=>{
-     const resposta= await fetch("http://localhost:3000/api/usuario",{
+     const resposta= await fetch("/api/usuario",{
         method:"POST"
        })
        if(resposta.status===200){

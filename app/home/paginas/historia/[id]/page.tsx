@@ -37,7 +37,7 @@ useEffect(()=>{
     const mostrar_historia=async ()=>{
           try {
            
-           const resposta= await fetch(`http://localhost:3000/api/historia/${id}`,{
+           const resposta= await fetch(`/api/historia/${id}`,{
             method:"GET"
            })
       

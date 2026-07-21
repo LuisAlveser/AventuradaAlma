@@ -35,7 +35,7 @@ export function Login({ setlogin }: Props) {
   const login = async (data: UsuarioEsquemaLogin) => {
     try {
             setcarregando(true)
-            const response =await fetch(("http://localhost:3000/api/usuario/login"),{
+            const response =await fetch(("/api/usuario/login"),{
                headers: {
                 'Content-Type': 'application/json',
                },
@@ -68,7 +68,7 @@ export function Login({ setlogin }: Props) {
   const enviar_email=async (data:UsuarioEnviarEmail)=>{
        try {
         setcarregando(true)
-         const resposta=await fetch("http://localhost:3000/api/usuario/enviar_email",{
+         const resposta=await fetch("/api/usuario/enviar_email",{
             method:"POST",
             body:JSON.stringify({email:data.email})
 

@@ -61,7 +61,7 @@ useEffect(()=>{
     const buscarcrianca=async (pagina:number)=>{
            try {
              setcarregando(true)
-     const resposta =await fetch(`http://localhost:3000/api/historia?pagina=${pagina}`,{
+     const resposta =await fetch(`/api/historia?pagina=${pagina}`,{
         method:"GET"
      })
        if(resposta.status===200){
@@ -84,7 +84,7 @@ useEffect(()=>{
 
 const excluir=async (id:string)=>{
     try {
-          const resposta =await fetch(`http://localhost:3000/api/historia/${id}`,{
+          const resposta =await fetch(`/api/historia/${id}`,{
         method:"DELETE"
      })
      if(resposta.status===200){
@@ -99,7 +99,7 @@ const excluir=async (id:string)=>{
     }
 }
 const ler_nevamente =(id:string)=>{
-    rota.push(`http://localhost:3000/home/paginas/historia/${id}`)
+    rota.push(`/home/paginas/historia/${id}`)
 }
     return(
               <div className="flex flex-col justify-center items-center">

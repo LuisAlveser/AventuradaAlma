@@ -37,7 +37,7 @@ export function FormularioUsuario({ setcadastro }: Props) {
              usuario.append("email",data.email)
               usuario.append("senha",data.senha)
             
-            const response= await fetch("http://localhost:3000/api/usuario/cadastro",{
+            const response= await fetch("/api/usuario/cadastro",{
             method:"POST",
             body:usuario
             }) 

@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import z, { string } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, Suspense, useEffect, useState } from "react";
 import { CriancaCadastro } from "@/app/modelos";
 import { 
   FaUser, FaCalendarAlt, FaStar, FaPaw, FaAward, 
@@ -35,7 +35,8 @@ interface dados{
 }
 type CriancaCadastroEsquema = z.infer<typeof CriancaCadastro>
 
-export default function FormularioAtualizarCrianca() {
+function FormularioAtualizarCriancaConteudo() {
+    
     const [carregando, setCarregando] = useState(false);
      const searchParams = useSearchParams();
      const id = searchParams.get('id')
@@ -103,7 +104,7 @@ export default function FormularioAtualizarCrianca() {
         formData.append("foto_perfil", data.foto_perfil[0]); 
     }
         setCarregando(true)
-      const resposta=await fetch(`http://localhost:3000/api/crianca/${id}`,{
+      const resposta=await fetch(`/api/crianca/${id}`,{
         method:"PATCH",
         body:formData
       })
@@ -128,9 +129,9 @@ export default function FormularioAtualizarCrianca() {
     
 
     return (
-        
+       
           <div className="flex justify-center items-center w-full h-full bg-slate-100 p-2 overflow-hidden">
-            {carregando?<Carregando/>:
+             <Suspense fallback={<Carregando/>}>
                <form 
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full max-w-5xl bg-white rounded-xl p-5 shadow-lg border border-slate-100 flex flex-col justify-between max-h-[95vh] overflow-y-auto md:overflow-hidden"
@@ -272,9 +273,19 @@ export default function FormularioAtualizarCrianca() {
                     </button>
                 </div>
             </form>
-            }
+            </Suspense>
             
            
         </div>
+        
     );
+}
+export default function FormularioAtualizarCrianca() {
+  return (
+    <div className="flex justify-center items-center w-full h-full bg-slate-100 p-2 overflow-hidden">
+      <Suspense fallback={<Carregando />}>
+        <FormularioAtualizarCriancaConteudo />
+      </Suspense>
+    </div>
+  );
 }

@@ -60,7 +60,7 @@ export async function enviar_email(email:string){
                                 <tr>
                                     <td align="center" style="background-color: #10b981; border-radius: 6px;">
                                         <!-- Substitua o '#' abaixo pela URL real da sua aplicação (ex: process.env.URL_REDEFNIR) -->
-                                        <a href='http://localhost:3000/?email=${email}' target="_blank" style="display: inline-block; padding: 14px 28px; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">
+                                        <a href='https://aventuradaalma.vercel.app/?email=${email}' target="_blank" style="display: inline-block; padding: 14px 28px; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">
                                             Alterar Minha Senha
                                         </a>
                                     </td>

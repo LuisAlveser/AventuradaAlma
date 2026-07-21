@@ -18,7 +18,7 @@ export default function PlanosHome() {
     const comprar_plano=async (plano:string)=>{
         try {
         plano==="BASICO"? setcarregando_plano_basico(true):setcarregando_plano_pro(true)
-        const resposta=await fetch("http://localhost:3000/api/usuario/info",{
+        const resposta=await fetch("/api/usuario/info",{
             method:"POST",
             body:JSON.stringify(plano)
         })  
@@ -38,7 +38,7 @@ export default function PlanosHome() {
     }
     
     const voltar=()=>{
-        console.log("Botão x ")
+        
         rota.back()
     }
   return (

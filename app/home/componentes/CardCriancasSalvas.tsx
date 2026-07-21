@@ -52,12 +52,12 @@ useEffect(()=>{
     const buscarcrianca=async (pagina:number)=>{
            try {
              setcarregando(true)
-     const resposta =await fetch(`http://localhost:3000/api/crianca?pagina=${pagina}`,{
+     const resposta =await fetch(`/api/crianca?pagina=${pagina}`,{
         method:"GET"
      })
        if(resposta.status===200){
         const dados:dados=await resposta.json()
-         await buscarUsuario()
+        
         setpaginacao(dados.paginacao)
         setCrianca(dados.crianca)
        
@@ -78,7 +78,7 @@ const editar =(dados:crianca)=>{
 }
 const excluir=async (id:string)=>{
     try {
-          const resposta =await fetch(`http://localhost:3000/api/crianca/${id}`,{
+          const resposta =await fetch(`/api/crianca/${id}`,{
         method:"DELETE"
      })
      if(resposta.status===200){
