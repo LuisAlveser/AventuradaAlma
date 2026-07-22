@@ -8,7 +8,7 @@ import { Suspense, useEffect, useState } from "react";
 import { FormularioUsuario } from "./componentes/FormularioCadastroUsuario";
 import { Login } from "./componentes/FormularioLoginUsuario";
 import { Planos } from "./componentes/Planos";
-import { email } from "zod";
+
 import { FormularioAlterarSenha } from "./componentes/FormularioAlterarSenha";
 import {useSearchParams} from "next/navigation"
 
@@ -60,6 +60,7 @@ function ConteudoHome() {
           </div>
         </div>
 
+        
         
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:grid-rows-2 justify-center items-center">
   
