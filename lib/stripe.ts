@@ -43,7 +43,12 @@ export const createPlanoBasico=async(usuario_id:string,email:string,plano:string
         })
         return ({url:sessao.url})
      } catch (error) {
-        console.log(error)
+        if(error instanceof Error){
+            console.error("Erro na criação de Checkout Stripe:", error?.message || error)
+    
+    throw new Error(error?.message || "Falha ao conectar com o Stripe");
+        }
+      
      }
 
 }
