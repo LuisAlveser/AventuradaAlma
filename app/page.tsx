@@ -10,22 +10,19 @@ import { Login } from "./componentes/FormularioLoginUsuario";
 import { Planos } from "./componentes/Planos";
 import { email } from "zod";
 import { FormularioAlterarSenha } from "./componentes/FormularioAlterarSenha";
+import {useSearchParams} from "next/navigation"
 
-interface PageProps {
-  searchParams: Promise<{ email?: string }>;
-}
-
-export default function Home({searchParams}:PageProps) {
+export default function Home() {
 
   const[login,setlogin]=useState<boolean>(false)
   const[cadastro,setcadastro]=useState<boolean>(false)
   const[planos,setplanos]=useState<boolean>(false)
   const[alterarsenhaformulario,setalterarsenhaformuario]=useState<boolean>(false)
   const[alterarsenhaEmail,setalterarsenhaEmail]=useState<string>("")
-  
+  const searchParams=useSearchParams()
    useEffect(()=>{
-    const buscar_email=async ()=>{
-        const {email}= await searchParams
+    
+        const email= searchParams.get("email")
        
         if(email){
           setalterarsenhaEmail(email)
@@ -33,9 +30,9 @@ export default function Home({searchParams}:PageProps) {
         }else{
           setalterarsenhaEmail("")
         }
-    }
-     buscar_email()
-   },[])
+    
+    
+   },[searchParams])
   
   return (
     <div className="w-full min-h-screen flex flex-col bg-blue-300">

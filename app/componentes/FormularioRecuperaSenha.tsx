@@ -40,8 +40,8 @@ export function FormularioRecuperaSenha({ setRecuperarSenha }: Props) {
         setcarregando(true)
          const resposta=await fetch("/api/usuario/enviar_email",{
             method:"POST",
-            body:JSON.stringify({email:data.email})
-
+            body:JSON.stringify({email:data.email}),
+        
          })
          if(resposta.status===200){
            return toast.success("Email enviado com sucesso")
