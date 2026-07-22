@@ -17,6 +17,9 @@ interface UsuarioToken{
     exp?: number;
 
 }
+interface corpo{
+    plano:string
+}
 export async function GET(request:NextRequest){
     try {
         const token = request.cookies.get("auth_token")?.value
@@ -70,8 +73,8 @@ export async function PATCH(request:NextRequest){
 }
 export async function POST(request:NextRequest){
     try {
-        const plano:string=await request.json()
-      
+        const corpo:corpo=await request.json()
+         const {plano}=corpo
           const token = request.cookies.get("auth_token")?.value
          
         if (!token) {
