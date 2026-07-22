@@ -4,7 +4,7 @@ import { Botao } from "@/app/componentes/Botao";
 import { CardsHome } from "./componentes/CardsHome";
 import { FaBookOpen, FaUserAlt,FaImage } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FormularioUsuario } from "./componentes/FormularioCadastroUsuario";
 import { Login } from "./componentes/FormularioLoginUsuario";
 import { Planos } from "./componentes/Planos";
@@ -12,7 +12,7 @@ import { email } from "zod";
 import { FormularioAlterarSenha } from "./componentes/FormularioAlterarSenha";
 import {useSearchParams} from "next/navigation"
 
-export default function Home() {
+function ConteudoHome() {
 
   const[login,setlogin]=useState<boolean>(false)
   const[cadastro,setcadastro]=useState<boolean>(false)
@@ -95,6 +95,15 @@ export default function Home() {
        :null
        }
       </main>
+    </div>
+  );
+}
+export default function Home() {
+  return (
+    <div className="w-full min-h-screen flex flex-col bg-blue-300">
+      <Suspense fallback={<div className="min-h-screen bg-blue-300" />}>
+        <ConteudoHome />
+      </Suspense>
     </div>
   );
 }
