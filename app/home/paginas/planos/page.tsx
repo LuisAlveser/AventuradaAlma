@@ -20,11 +20,11 @@ export default function PlanosHome() {
         plano==="BASICO"? setcarregando_plano_basico(true):setcarregando_plano_pro(true)
         const resposta=await fetch("/api/usuario/info",{
             method:"POST",
-            body:JSON.stringify(plano)
+            body:JSON.stringify({plano})
         })  
         if(resposta.status===200){
             const url: Url = await resposta.json()
-            rota.push(url.sessao.url)
+            window.location.href=url.sessao.url
         }
         if(resposta.status===500){
             toast.error("Erro no direcionamento para pagamento")

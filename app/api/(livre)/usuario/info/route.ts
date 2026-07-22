@@ -81,8 +81,12 @@ export async function POST(request:NextRequest){
     return NextResponse.json({ mensagem: "Não autorizado" }, { status: 401 })
   } 
  
+ 
    const usuario:UsuarioToken =  await jwt.decode(token) as UsuarioToken
-    
+   
+     if (!usuario || !usuario.id || !usuario.email) {
+      return NextResponse.json({ mensagem: "Token inválido" }, { status: 401 })
+    }
        const sessao=await createPlanoBasico(usuario.id,usuario.email,plano)
       
 
