@@ -20,6 +20,9 @@ export default function PlanosHome() {
         plano==="BASICO"? setcarregando_plano_basico(true):setcarregando_plano_pro(true)
         const resposta=await fetch("/api/usuario/info",{
             method:"POST",
+            headers: {
+        "Content-Type": "application/json" 
+    },
             body:JSON.stringify({plano})
         })  
         if(resposta.status===200){

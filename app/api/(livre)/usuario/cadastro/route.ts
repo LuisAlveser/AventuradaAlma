@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     })
     if(response){
      
-      const tokenpayload={id:response.id,nome:response.nome,email:response.email,plano:response.plano,foto:response.foto_perfil,istorias_geradas_no_mes:response.historias_geradas_no_mes}
+      const tokenpayload={id:response.id,nome:response.nome,email:response.email,plano:response.plano,foto:response.foto_perfil,historias_geradas_no_mes:response.historias_geradas_no_mes}
 
       const token=jwt.sign(tokenpayload,process.env.SEGREDO!,{expiresIn:"1h"})
 
