@@ -47,7 +47,7 @@ function FormularioAtualizarCriancaConteudo() {
         
        const  buscar=async ()=>{
             try {
-             const resposta=await fetch(`http://localhost:3000/api/crianca/${id}`,{
+             const resposta=await fetch(`/api/crianca/${id}`,{
         method:"GET",
          
       })

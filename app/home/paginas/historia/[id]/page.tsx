@@ -33,47 +33,39 @@ export default function Historia({params}:{params:Promise<{id:string}>}){
 
        
    
-useEffect(()=>{  
-    const mostrar_historia=async ()=>{
-          try {
-           
-           const resposta= await fetch(`/api/historia/${id}`,{
-            method:"GET"
-           })
-      
-     
-   
-     if(resposta.status===200){
-        const  {historia}:Historia = await resposta.json()
-       
-    
-        setTexto(historia.texto)
-       
-      if(Array.isArray(historia.imagem)&&historia.imagem.length>0){
-        const img1 = historia.imagem[0]?.conteudo;
-        const img2 = historia.imagem[1]?.conteudo;
-          console.log(img1,img2)
-          setImagens([img1,img2])
-      }else{
+useEffect(() => {
+    const mostrar_historia = async () => {
+      try {
+        const resposta = await fetch(`/api/historia/${id}`, {
+          method: "GET",
+        });
 
-          
-      setImagens(null)
+        if (resposta.ok) {
+          const { historia }: Historia = await resposta.json();
+
+          setTexto(historia.texto);
+
+          if (Array.isArray(historia.imagem) && historia.imagem.length > 0) {
+            const img1 = historia.imagem[0]?.conteudo;
+            const img2 = historia.imagem[1]?.conteudo;
+            setImagens([img1, img2]);
+          } else {
+            setImagens(null);
+          }
+        } else {
+          throw new Error("Falha ao buscar história");
+        }
+      } catch (error) {
+        console.error("Erro em ler novamente história", error);
+        toast.error("Erro no carregamento do texto");
+        setTexto("Erro ao carregar história. Tente novamente.");
+      } finally {
+        setcarregando(false);
       }
-   
-     }
-     
-  
-   } catch (error) {
-     console.log("Erro em ler novamente histo´ria",error)
-      toast.error("Erro na geração do texto")
-       setTexto("Erro ao carregar história. Tente novamente.");
-  }finally{
-    setcarregando(false)
-  }
-    }
-    mostrar_historia()
-    
-   },[])
+    };
+
+    mostrar_historia();
+  }, [id]);
 
 
 
