@@ -34,6 +34,10 @@ export const createPlanoBasico=async(usuario_id:string,email:string,plano:string
                 enabled:true
             },
             billing_address_collection:"required",
+            customer_update: {
+    name: "auto",
+    address: "auto"
+  },
             line_items:[
                 {
                    quantity:1,

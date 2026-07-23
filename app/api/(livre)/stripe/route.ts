@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
        
         event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
     
-        console.log("Evento recebido do Stripe:", event.type);
+       
    
         if (event.type === "checkout.session.completed"|| event.type === "checkout.session.async_payment_succeeded") {
             const session = event.data.object as Stripe.Checkout.Session;
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
                  return NextResponse.json({ mensagem: "Usuario não encontrado" }, { status: 404 });
             }
 
-         //Baico valor 2990 teste valor 100
+       
             const plano: "BASICO" | "PRO" = totalPago === 2990 ? "BASICO" : "PRO";
             
            
